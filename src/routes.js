@@ -10,6 +10,8 @@ import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
+import Loves from './views/pages/loves.vue'
+
 let routes = [
     {
         path: '/login',
@@ -31,7 +33,7 @@ let routes = [
         iconCls: 'fa fa-address-card',
         leaf: true,//只有一个节点
         children: [
-            { path: '/loves', component: Table, name: '表白管理' }
+            { path: '/loves', component: Loves, name: '表白管理' }
         ]
     },
     {
@@ -52,6 +54,16 @@ let routes = [
         leaf: true,//只有一个节点
         children: [
             { path: '/replies', component: Table, name: '回复管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-address-card',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/systemNotices', component: Table, name: '系统通知' }
         ]
     },
     {
