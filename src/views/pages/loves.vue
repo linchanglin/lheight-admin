@@ -4,10 +4,10 @@
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.name" placeholder="内容"></el-input>
+                    <el-input v-model="filters.search" placeholder="内容"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" v-on:click="getUsers">查询</el-button>
+                    <el-button type="primary" v-on:click="getLoves">查询</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -16,30 +16,30 @@
         </el-col>
     
         <!--列表-->
-        <el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+        <el-table :data="loves" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
-            <el-table-column prop="name" label="内容" width="120" sortable>
+            <el-table-column prop="content" label="内容" width="120" sortable>
             </el-table-column>
-            <el-table-column prop="sex" label="图片" width="100" :formatter="formatSex" sortable>
+            <el-table-column prop="images" label="图片" width="100" :formatter="formatSex" sortable>
             </el-table-column>
-            <el-table-column prop="age" label="视频" width="100" sortable>
+            <el-table-column prop="video_url" label="视频" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="birth" label="地址" width="120" sortable>
+            <el-table-column prop="location" label="地址" width="120" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="匿名" min-width="180" sortable>
+            <el-table-column prop="comment_nums" label="匿名" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="评论数" min-width="180" sortable>
+            <el-table-column prop="comment_nums" label="评论数" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="喜欢数" min-width="180" sortable>
+            <el-table-column prop="praise_nums" label="喜欢数" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="阅读数" min-width="180" sortable>
+            <el-table-column prop="praise_nums" label="阅读数" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="可见" min-width="180" sortable>
+            <el-table-column prop="praise_nums" label="可见" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="addr" label="创建时间" min-width="180" sortable>
+            <el-table-column prop="created_at" label="创建时间" min-width="180" sortable>
             </el-table-column>
             <el-table-column label="操作" width="150">
                 <template scope="scope">
@@ -117,15 +117,16 @@
 <script>
 import util from '../../common/js/util'
 //import NProgress from 'nprogress'
-import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+// import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+import { getLovesList, getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
 
 export default {
     data() {
         return {
             filters: {
-                name: ''
+                search: ''
             },
-            users: [],
+            loves: [],
             total: 0,
             page: 1,
             listLoading: false,
@@ -174,6 +175,21 @@ export default {
         handleCurrentChange(val) {
             this.page = val;
             this.getUsers();
+        },
+        //获取表白列表
+        getLoves() {
+            let para = {
+                page: this.page,
+                search: this.filters.search
+            };
+            this.listLoading = true;
+            getLovesList(para).then((res) => {
+                console.log('getLovesList res', res);
+                this.total = res.data.data.length;
+                this.loves = res.data.data;
+                this.listLoading = false;
+            });
+
         },
         //获取用户列表
         getUsers() {
@@ -311,7 +327,8 @@ export default {
         }
     },
     mounted() {
-        this.getUsers();
+        // this.getUsers();
+        this.getLoves();
     }
 }
 

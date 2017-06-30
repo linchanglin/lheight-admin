@@ -30,7 +30,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-address-card',
+        iconCls: 'fa fa-heart',
         leaf: true,//只有一个节点
         children: [
             { path: '/loves', component: Loves, name: '表白管理' }
@@ -40,7 +40,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-address-card',
+        iconCls: 'fa fa-comment',
         leaf: true,//只有一个节点
         children: [
             { path: '/comments', component: Table, name: '评论管理' }
@@ -50,7 +50,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-address-card',
+        iconCls: 'fa fa-comments-o',
         leaf: true,//只有一个节点
         children: [
             { path: '/replies', component: Table, name: '回复管理' }
@@ -60,7 +60,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-address-card',
+        iconCls: 'fa fa-bell',
         leaf: true,//只有一个节点
         children: [
             { path: '/systemNotices', component: Table, name: '系统通知' }
@@ -70,7 +70,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-address-card',
+        iconCls: 'fa fa-exclamation-circle',
         leaf: true,//只有一个节点
         children: [
             { path: '/badReports', component: Table, name: '举报处理' }
