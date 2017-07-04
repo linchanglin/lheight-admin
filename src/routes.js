@@ -29,11 +29,13 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '',
+        name: '表白管理',
         iconCls: 'fa fa-heart',
-        leaf: true,//只有一个节点
         children: [
-            { path: '/loves', component: Loves, name: '表白管理' }
+            { path: '/newLoves', component: Loves, name: '最新' },
+            { path: '/hotLoves', component: Loves, name: '热门' },
+            { path: '/imageLoves', component: Loves, name: '图片' },
+            { path: '/videoLoves', component: Loves, name: '视频' },
         ]
     },
     {
@@ -76,6 +78,17 @@ let routes = [
             { path: '/badReports', component: Table, name: '举报处理' }
         ]
     },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-user',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/users', component: Table, name: '用户管理' }
+        ]
+    },
+
 
     // {
     //     path: '/',
