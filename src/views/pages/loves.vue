@@ -68,11 +68,26 @@
                 <el-form-item label="视频">
                     <el-input type="textarea" v-model="editForm.video_url"></el-input>
                 </el-form-item>
-                <el-form-item label="位置" prop="location">
+                <el-form-item label="地址" prop="location">
                     <el-input v-model="editForm.location" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="匿名">
-                    <el-radio-group v-model="addForm.anonymous">
+                    <el-radio-group v-model="editForm.anonymous">
+                        <el-radio class="radio" :label="1">是</el-radio>
+                        <el-radio class="radio" :label="0">否</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="评论数" prop="comment_nums">
+                    <el-input v-model="editForm.comment_nums" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="喜欢数" prop="praise_nums">
+                    <el-input v-model="editForm.praise_nums" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="阅读数" prop="read_nums">
+                    <el-input v-model="editForm.read_nums" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="可见性">
+                    <el-radio-group v-model="editForm.available">
                         <el-radio class="radio" :label="1">是</el-radio>
                         <el-radio class="radio" :label="0">否</el-radio>
                     </el-radio-group>
@@ -96,7 +111,7 @@
                 <el-form-item label="视频">
                     <el-input type="textarea" v-model="addForm.video_url"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="位置" prop="location">
+                <!--<el-form-item label="地址" prop="location">
                     <el-input v-model="addForm.location" auto-complete="off"></el-input>
                 </el-form-item>-->
                 <el-form-item label="匿名">
@@ -204,6 +219,7 @@ export default {
         },
         //显示编辑界面
         handleEdit: function (index, row) {
+            console.log('handleEdit', index, row);
             this.editFormVisible = true;
             this.editForm = Object.assign({}, row);
         },
