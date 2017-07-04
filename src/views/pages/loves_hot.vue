@@ -7,7 +7,7 @@
                     <el-input v-model="filters.search" placeholder="内容"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" v-on:click="getNewLoves">查询</el-button>
+                    <el-button type="primary" v-on:click="getLoves">查询</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -16,32 +16,32 @@
         </el-col>
     
         <!--列表-->
-        <el-table :data="loves" border highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+        <el-table :data="loves" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
             <el-table-column prop="content" label="内容" width="120" sortable>
             </el-table-column>
-            <el-table-column prop="images" label="图片" width="100" sortable>
+            <el-table-column prop="images" label="图片" width="100" :formatter="formatSex" sortable>
             </el-table-column>
             <el-table-column prop="video_url" label="视频" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="location" label="地址" width="100" sortable>
+            <el-table-column prop="location" label="地址" width="120" sortable>
             </el-table-column>
-            <el-table-column prop="anonymous" label="匿名" min-width="60" :formatter="formatAnonymous" sortable>
+            <el-table-column prop="comment_nums" label="匿名" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="comment_nums" label="评论数" min-width="60" sortable>
+            <el-table-column prop="comment_nums" label="评论数" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="praise_nums" label="喜欢数" min-width="60" sortable>
+            <el-table-column prop="praise_nums" label="喜欢数" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="read_nums" label="阅读数" min-width="60" sortable>
+            <el-table-column prop="praise_nums" label="阅读数" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="available" label="可见" min-width="60" :formatter="formatAvailable" sortable>
+            <el-table-column prop="praise_nums" label="可见" min-width="180" sortable>
             </el-table-column>
-            <el-table-column prop="created_at" label="创建时间" min-width="100" sortable>
+            <el-table-column prop="created_at" label="创建时间" min-width="180" sortable>
             </el-table-column>
-            <el-table-column fixed="right" label="操作" width="100">
+            <el-table-column label="操作" width="150">
                 <template scope="scope">
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
@@ -59,23 +59,23 @@
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-                <el-form-item label="内容">
-                    <el-input type="textarea" v-model="editForm.content"></el-input>
+                <el-form-item label="姓名" prop="name">
+                    <el-input v-model="editForm.name" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="图片">
-                    <el-input type="textarea" v-model="editForm.images"></el-input>
-                </el-form-item>
-                <el-form-item label="视频">
-                    <el-input type="textarea" v-model="editForm.video_url"></el-input>
-                </el-form-item>
-                <el-form-item label="位置" prop="location">
-                    <el-input v-model="editForm.location" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="匿名">
-                    <el-radio-group v-model="addForm.anonymous">
-                        <el-radio class="radio" :label="1">是</el-radio>
-                        <el-radio class="radio" :label="0">否</el-radio>
+                <el-form-item label="性别">
+                    <el-radio-group v-model="editForm.sex">
+                        <el-radio class="radio" :label="1">男</el-radio>
+                        <el-radio class="radio" :label="0">女</el-radio>
                     </el-radio-group>
+                </el-form-item>
+                <el-form-item label="年龄">
+                    <el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
+                </el-form-item>
+                <el-form-item label="生日">
+                    <el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="地址">
+                    <el-input type="textarea" v-model="editForm.addr"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -87,23 +87,23 @@
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-                <el-form-item label="内容">
-                    <el-input type="textarea" v-model="addForm.content"></el-input>
+                <el-form-item label="姓名" prop="name">
+                    <el-input v-model="addForm.name" auto-complete="off"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="图片">
-                    <el-input type="textarea" v-model="addForm.images"></el-input>
-                </el-form-item>-->
-                <el-form-item label="视频">
-                    <el-input type="textarea" v-model="addForm.video_url"></el-input>
-                </el-form-item>
-                <!--<el-form-item label="位置" prop="location">
-                    <el-input v-model="addForm.location" auto-complete="off"></el-input>
-                </el-form-item>-->
-                <el-form-item label="匿名">
-                    <el-radio-group v-model="addForm.anonymous">
-                        <el-radio class="radio" :label="1">是</el-radio>
-                        <el-radio class="radio" :label="0">否</el-radio>
+                <el-form-item label="性别">
+                    <el-radio-group v-model="addForm.sex">
+                        <el-radio class="radio" :label="1">男</el-radio>
+                        <el-radio class="radio" :label="0">女</el-radio>
                     </el-radio-group>
+                </el-form-item>
+                <el-form-item label="年龄">
+                    <el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
+                </el-form-item>
+                <el-form-item label="生日">
+                    <el-date-picker type="date" placeholder="选择日期" v-model="addForm.birth"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="地址">
+                    <el-input type="textarea" v-model="addForm.addr"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -118,7 +118,7 @@
 import util from '../../common/js/util'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-import { getNewLovesList, getUserListPage, removeUser, batchRemoveUser, editLove, addLove } from '../../api/api';
+import { getLovesList, getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
 
 export default {
     data() {
@@ -135,50 +135,97 @@ export default {
             editFormVisible: false,//编辑界面是否显示
             editLoading: false,
             editFormRules: {
-                content: [
-                    { required: true, message: '请输入内容', trigger: 'blur' }
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' }
                 ]
             },
             //编辑界面数据
-            editForm: {},
+            editForm: {
+                id: 0,
+                name: '',
+                sex: -1,
+                age: 0,
+                birth: '',
+                addr: ''
+            },
 
             addFormVisible: false,//新增界面是否显示
             addLoading: false,
             addFormRules: {
-                content: [
-                    { required: true, message: '请输入内容', trigger: 'blur' }
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' }
                 ]
             },
             //新增界面数据
-            addForm: {}
+            addForm: {
+                name: '',
+                sex: -1,
+                age: 0,
+                birth: '',
+                addr: ''
+            }
+
         }
     },
     methods: {
-        //是否显示转换
-        formatAnonymous: function (row, column) {
-            return row.anonymous == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
-        },
-        formatAvailable: function (row, column) {
-            return row.available == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
+        //性别显示转换
+        formatSex: function (row, column) {
+            return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
         },
         handleCurrentChange(val) {
             this.page = val;
             this.getUsers();
         },
         //获取表白列表
-        getNewLoves() {
+        getLoves() {
+
+            let type;
+            if ($route.name == '最新') {
+                type = 'newLoves';
+            } else if ($route.name == '热门') {
+                type = 'hotLoves';
+            } else if ($route.name == '图片') {
+                type = 'imageLoves';
+            } else if ($route.name == '视频') {
+                type = 'videoLoves';
+            }
+
             let para = {
-                type: 'newLoves',
+                type: type,
                 page: this.page,
                 search: this.filters.search
             };
             this.listLoading = true;
-            getNewLovesList(para).then((res) => {
-                console.log('getNewLovesList res', res);
-                this.total = res.data.length;
+            getLovesList(para).then((res) => {
+                console.log('getLovesList res', res);
+                this.total = res.data.data.length;
                 this.loves = res.data.data;
                 this.listLoading = false;
             });
+
+        },
+        //获取用户列表
+        getUsers() {     
+            let para = {
+                page: this.page,
+                name: this.filters.name,
+            };
+            this.listLoading = true;
+            //NProgress.start();
+            getUserListPage(para).then((res) => {
+                console.log('resssssssssss', res);
+                this.total = res.data.total;
+                this.users = res.data.users;
+                this.listLoading = false;
+                //NProgress.done();
+            });
+
+
+
+            // getUserListPage().then((res) => {
+            //     console.log('resssssssssss', res);
+            // });
+
 
         },
         //删除
@@ -211,9 +258,11 @@ export default {
         handleAdd: function () {
             this.addFormVisible = true;
             this.addForm = {
-                content: '',
-                video_url: '',
-                anonymous: 0
+                name: '',
+                sex: -1,
+                age: 0,
+                birth: '',
+                addr: ''
             };
         },
         //编辑
@@ -224,7 +273,8 @@ export default {
                         this.editLoading = true;
                         //NProgress.start();
                         let para = Object.assign({}, this.editForm);
-                        editLove(para).then((res) => {
+                        para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
+                        editUser(para).then((res) => {
                             this.editLoading = false;
                             //NProgress.done();
                             this.$message({
@@ -233,7 +283,7 @@ export default {
                             });
                             this.$refs['editForm'].resetFields();
                             this.editFormVisible = false;
-                            this.getNewLoves();
+                            this.getUsers();
                         });
                     });
                 }
@@ -247,7 +297,8 @@ export default {
                         this.addLoading = true;
                         //NProgress.start();
                         let para = Object.assign({}, this.addForm);
-                        addLove(para).then((res) => {
+                        para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
+                        addUser(para).then((res) => {
                             this.addLoading = false;
                             //NProgress.done();
                             this.$message({
@@ -256,7 +307,7 @@ export default {
                             });
                             this.$refs['addForm'].resetFields();
                             this.addFormVisible = false;
-                            this.getNewLoves();
+                            this.getUsers();
                         });
                     });
                 }
@@ -289,7 +340,8 @@ export default {
         }
     },
     mounted() {
-        this.getNewLoves();
+        // this.getUsers();
+        this.getLoves();
     }
 }
 
