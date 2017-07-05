@@ -27,7 +27,7 @@
             </el-table-column>
             <el-table-column prop="video_url" label="视频" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="location" label="地址" width="100" sortable>
+            <el-table-column prop="location" label="位置" width="100" sortable>
             </el-table-column>
             <el-table-column prop="anonymous" label="匿名" min-width="60" :formatter="formatAnonymous" sortable>
             </el-table-column>
@@ -39,11 +39,14 @@
             </el-table-column>
             <el-table-column prop="available" label="可见" min-width="60" :formatter="formatAvailable" sortable>
             </el-table-column>
+            <el-table-column prop="userInfo.nickname" label="创建人" width="100" sortable>
+                <router-link :to="{ name: 'user', params: { userId: userInfo.id }}">{{userInfo.nickname}}</router-link>
+            </el-table-column>
             <el-table-column prop="created_at" label="创建时间" min-width="100" sortable>
             </el-table-column>
-            <el-table-column fixed="right" label="操作" width="100">
+            <el-table-column fixed="right" label="操作" width="150">
                 <template scope="scope">
-                    <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
                     <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
@@ -62,30 +65,30 @@
                 <el-form-item label="内容">
                     <el-input type="textarea" v-model="editForm.content"></el-input>
                 </el-form-item>
-                <el-form-item label="图片">
+                <!--<el-form-item label="图片">
                     <el-input type="textarea" v-model="editForm.images"></el-input>
-                </el-form-item>
-                <el-form-item label="视频">
+                </el-form-item>-->
+                <el-form-item label="视频地址">
                     <el-input type="textarea" v-model="editForm.video_url"></el-input>
                 </el-form-item>
-                <el-form-item label="地址" prop="location">
+                <!--<el-form-item label="位置">
                     <el-input v-model="editForm.location" auto-complete="off"></el-input>
-                </el-form-item>
+                </el-form-item>-->
                 <el-form-item label="匿名">
                     <el-radio-group v-model="editForm.anonymous">
                         <el-radio class="radio" :label="1">是</el-radio>
                         <el-radio class="radio" :label="0">否</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="评论数" prop="comment_nums">
+                <!--<el-form-item label="评论数">
                     <el-input v-model="editForm.comment_nums" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="喜欢数" prop="praise_nums">
+                <el-form-item label="喜欢数">
                     <el-input v-model="editForm.praise_nums" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="阅读数" prop="read_nums">
+                <el-form-item label="阅读数">
                     <el-input v-model="editForm.read_nums" auto-complete="off"></el-input>
-                </el-form-item>
+                </el-form-item>-->
                 <el-form-item label="可见性">
                     <el-radio-group v-model="editForm.available">
                         <el-radio class="radio" :label="1">是</el-radio>
@@ -105,15 +108,9 @@
                 <el-form-item label="内容">
                     <el-input type="textarea" v-model="addForm.content"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="图片">
-                    <el-input type="textarea" v-model="addForm.images"></el-input>
-                </el-form-item>-->
-                <el-form-item label="视频">
+                <el-form-item label="视频地址">
                     <el-input type="textarea" v-model="addForm.video_url"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="地址" prop="location">
-                    <el-input v-model="addForm.location" auto-complete="off"></el-input>
-                </el-form-item>-->
                 <el-form-item label="匿名">
                     <el-radio-group v-model="addForm.anonymous">
                         <el-radio class="radio" :label="1">是</el-radio>
@@ -218,8 +215,7 @@ export default {
             });
         },
         //显示编辑界面
-        handleEdit: function (index, row) {
-            console.log('handleEdit', index, row);
+        handleEdit: function (row) {
             this.editFormVisible = true;
             this.editForm = Object.assign({}, row);
         },
