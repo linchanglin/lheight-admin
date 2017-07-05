@@ -22,7 +22,7 @@ export default {
 
     //登录
     mock.onPost('/login').reply(config => {
-      let {username, password} = JSON.parse(config.data);
+      let { username, password } = JSON.parse(config.data);
       return new Promise((resolve, reject) => {
         let user = null;
         setTimeout(() => {
@@ -45,7 +45,7 @@ export default {
 
     //获取用户列表
     mock.onGet('/user/list').reply(config => {
-      let {name} = config.params;
+      let { name } = config.params;
       let mockUsers = _Users.filter(user => {
         if (name && user.name.indexOf(name) == -1) return false;
         return true;
@@ -59,9 +59,62 @@ export default {
       });
     });
 
+
+    //获取用户列表
+    mock.onGet('/loves').reply(config => {
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+            id: 10,
+            content: "三月，醉一场青春的流年。慢步在三月的春光里，走走停停，看花开嫣然",
+            belongsToMe: 0,
+            video_url: null,
+            images: [],
+            userInfo: {
+              id: 1,
+              nickname: "福大君",
+              avatarUrl: "http://cdn.collhome.com/love356.png",
+              college: "福州大学"
+            },
+            created_at: "07-01 00:01",
+            praise_nums: "409",
+            comment_nums: "1",
+            if_my_comment: 0,
+            if_my_praise: 0,
+            location: "",
+            anonymous: 1,
+            available: 1,
+          },
+          {
+            id: 9,
+            content: "福州高校表白墙 图片",
+            belongsToMe: 0,
+            video_url: null,
+            images: [],
+            userInfo: {
+              id: 1,
+              nickname: "师大君",
+              avatarUrl: "http://cdn.collhome.com/love356.png",
+              college: "福州大学"
+            },
+            created_at: "07-01 00:01",
+            praise_nums: "409",
+            comment_nums: "1",
+            if_my_comment: 0,
+            if_my_praise: 0,
+            location: "",
+            anonymous: 0,
+            available: 0,
+          }
+          ]
+        }]);
+      });
+    });
+
     //获取用户列表（分页）
     mock.onGet('/user/listpage').reply(config => {
-      let {page, name} = config.params;
+      let { page, name } = config.params;
       let mockUsers = _Users.filter(user => {
         if (name && user.name.indexOf(name) == -1) return false;
         return true;

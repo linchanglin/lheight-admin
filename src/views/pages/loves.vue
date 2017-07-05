@@ -21,7 +21,7 @@
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
-            <el-table-column prop="content" label="内容" width="120" sortable>
+            <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="images" label="图片" width="100" sortable>
             </el-table-column>
@@ -29,20 +29,28 @@
             </el-table-column>
             <el-table-column prop="location" label="位置" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="anonymous" label="匿名" min-width="60" :formatter="formatAnonymous" sortable>
+            <el-table-column prop="anonymous" label="匿名" width="100" :formatter="formatAnonymous" sortable>
             </el-table-column>
-            <el-table-column prop="comment_nums" label="评论数" min-width="60" sortable>
+            <el-table-column prop="comment_nums" label="评论数" width="100" sortable>
+                <template scope="scope" sortable>
+                    <router-link :to="{ path: 'comments', params: { loveId: scope.row.id }}">{{scope.row.comment_nums}}</router-link>
+                </template>
             </el-table-column>
-            <el-table-column prop="praise_nums" label="喜欢数" min-width="60" sortable>
+            <el-table-column prop="praise_nums" label="喜欢数" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="read_nums" label="阅读数" min-width="60" sortable>
+            <el-table-column prop="read_nums" label="阅读数" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="available" label="可见" min-width="60" :formatter="formatAvailable" sortable>
+            <el-table-column prop="available" label="可见" width="100" :formatter="formatAvailable" sortable>
             </el-table-column>
-            <el-table-column prop="userInfo.nickname" label="创建人" width="100" sortable>
-                <router-link :to="{ name: 'user', params: { userId: userInfo.id }}">{{userInfo.nickname}}</router-link>
+            <el-table-column label="创建人" width="100">
+                <template scope="scope" sortable>
+                    <!--<el-button  type="text">{{scope.row.userInfo.nickname}}</el-button>-->
+                    <router-link :to="{ path: 'comments', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
+                    
+                </template>
+                <!--<router-link :to="{ name: 'user', params: { userId: userInfo.id }}">{{userInfo.nickname}}</router-link>-->
             </el-table-column>
-            <el-table-column prop="created_at" label="创建时间" min-width="100" sortable>
+            <el-table-column prop="created_at" label="创建时间" width="120" sortable>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
                 <template scope="scope">
@@ -63,13 +71,13 @@
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
                 <el-form-item label="内容">
-                    <el-input type="textarea" v-model="editForm.content"></el-input>
+                    <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="图片">
                     <el-input type="textarea" v-model="editForm.images"></el-input>
                 </el-form-item>-->
                 <el-form-item label="视频地址">
-                    <el-input type="textarea" v-model="editForm.video_url"></el-input>
+                    <el-input type="textarea" autosize v-model="editForm.video_url"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="位置">
                     <el-input v-model="editForm.location" auto-complete="off"></el-input>
@@ -106,10 +114,10 @@
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
                 <el-form-item label="内容">
-                    <el-input type="textarea" v-model="addForm.content"></el-input>
+                    <el-input type="textarea" autosize v-model="addForm.content"></el-input>
                 </el-form-item>
                 <el-form-item label="视频地址">
-                    <el-input type="textarea" v-model="addForm.video_url"></el-input>
+                    <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
                 </el-form-item>
                 <el-form-item label="匿名">
                     <el-radio-group v-model="addForm.anonymous">
@@ -175,7 +183,7 @@ export default {
         },
         handleCurrentChange(val) {
             this.page = val;
-            this.getUsers();
+            // this.getUsers();
         },
         //获取表白列表
         getNewLoves() {
@@ -208,7 +216,7 @@ export default {
                         message: '删除成功',
                         type: 'success'
                     });
-                    this.getUsers();
+                    // this.getUsers();
                 });
             }).catch(() => {
 
@@ -293,7 +301,7 @@ export default {
                         message: '删除成功',
                         type: 'success'
                     });
-                    this.getUsers();
+                    // this.getUsers();
                 });
             }).catch(() => {
 
