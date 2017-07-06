@@ -55,7 +55,7 @@
             <el-table-column fixed="right" label="操作" width="150">
                 <template scope="scope">
                     <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+                    <el-button type="danger" size="small" @click="handleDel(scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -138,7 +138,7 @@
 import util from '../../common/js/util'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-import { getNewLovesList, getUserListPage, removeUser, batchRemoveUser, editLove, addLove } from '../../api/api';
+import { getNewLovesList, removeLove, batchRemoveLove, editLove, addLove } from '../../api/api';
 
 export default {
     data() {
@@ -183,7 +183,7 @@ export default {
         },
         handleCurrentChange(val) {
             this.page = val;
-            // this.getUsers();
+            this.getNewLoves();
         },
         //获取表白列表
         getNewLoves() {
@@ -195,28 +195,28 @@ export default {
             this.listLoading = true;
             getNewLovesList(para).then((res) => {
                 console.log('getNewLovesList res', res);
-                this.total = res.data.length;
+                this.total = res.data.dataLength;
                 this.loves = res.data.data;
                 this.listLoading = false;
             });
 
         },
         //删除
-        handleDel: function (index, row) {
+        handleDel: function (row) {
             this.$confirm('确认删除该记录吗?', '提示', {
                 type: 'warning'
             }).then(() => {
                 this.listLoading = true;
                 //NProgress.start();
                 let para = { id: row.id };
-                removeUser(para).then((res) => {
+                removeLove(para).then((res) => {
                     this.listLoading = false;
                     //NProgress.done();
                     this.$message({
                         message: '删除成功',
                         type: 'success'
                     });
-                    // this.getUsers();
+                    this.getNewLoves();
                 });
             }).catch(() => {
 
@@ -294,14 +294,14 @@ export default {
                 this.listLoading = true;
                 //NProgress.start();
                 let para = { ids: ids };
-                batchRemoveUser(para).then((res) => {
+                batchRemoveLove(para).then((res) => {
                     this.listLoading = false;
                     //NProgress.done();
                     this.$message({
                         message: '删除成功',
                         type: 'success'
                     });
-                    // this.getUsers();
+                    this.getNewLoves();
                 });
             }).catch(() => {
 

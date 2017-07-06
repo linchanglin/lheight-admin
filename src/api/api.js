@@ -4,6 +4,9 @@ import axios from 'axios';
 
 let base = '';
 
+
+
+
 // export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
 
 // export const getUserList = params => { return axios.get(`${base}/user/list`, { params: params }); };
@@ -36,3 +39,10 @@ let base = '';
 export const getNewLovesList = params => { return axios.get(`${base}/loves`, {params: params}); };
 export const addLove = params => { return axios.post(`${base}/loves`, {params: params}); };
 export const editLove = params => { return axios.post(`${base}/loves`, {params: params}); };
+
+export const removeLove = params => { return axios.post(`${base}/loves`, {params: params}); };
+export const batchRemoveLove = params => { return axios.post(`${base}/loves`, {params: params}); };
+
+
+
+
