@@ -11,6 +11,9 @@ import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
 import Loves from './views/pages/loves.vue'
+import Comments from './views/pages/comments.vue'
+import Replies from './views/pages/replies.vue'
+import AboutLoveWall from './views/pages/comments.vue'
 
 let routes = [
     {
@@ -25,19 +28,39 @@ let routes = [
         name: '',
         hidden: true
     },
-    //{ path: '/main', component: Main },
     {
         path: '/',
         component: Home,
-        name: '表白管理',
+        name: '',
         iconCls: 'fa fa-heart',
+        leaf: true,//只有一个节点
         children: [
-            { path: '/newLoves', component: Loves, name: '最新' },
-            { path: '/hotLoves', component: Loves, name: '热门' },
-            { path: '/imageLoves', component: Loves, name: '图片' },
-            { path: '/videoLoves', component: Loves, name: '视频' },
+            { path: '/loves', component: Loves, name: '表白管理' }
         ]
     },
+    //{ path: '/main', component: Main },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '表白管理',
+    //     iconCls: 'fa fa-heart',
+    //     children: [
+    //         { path: '/newLoves', component: Loves, name: '最新' },
+    //         { path: '/hotLoves', component: Loves, name: '热门' },
+    //         { path: '/imageLoves', component: Loves, name: '图片' },
+    //         { path: '/videoLoves', component: Loves, name: '视频' },
+    //     ]
+    // },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '',
+    //     iconCls: 'fa fa-comment',
+    //     leaf: true,//只有一个节点
+    //     children: [
+    //         { path: '/comments', component: Table, name: '评论管理' }
+    //     ]
+    // },
     {
         path: '/',
         component: Home,
@@ -45,7 +68,7 @@ let routes = [
         iconCls: 'fa fa-comment',
         leaf: true,//只有一个节点
         children: [
-            { path: '/comments', component: Table, name: '评论管理' }
+            { path: '/loves/:id/comments', component: Comments, name: '评论管理' }
         ]
     },
     {
@@ -55,7 +78,7 @@ let routes = [
         iconCls: 'fa fa-comments-o',
         leaf: true,//只有一个节点
         children: [
-            { path: '/replies', component: Table, name: '回复管理' }
+            { path: '/replies', component: Replies, name: '回复管理' }
         ]
     },
     {
@@ -86,6 +109,16 @@ let routes = [
         leaf: true,//只有一个节点
         children: [
             { path: '/users', component: Table, name: '用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-home',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/aboutLoveWall', component: AboutLoveWall, name: '关于表白墙' }
         ]
     },
 

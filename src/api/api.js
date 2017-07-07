@@ -40,8 +40,19 @@ export const getNewLovesList = params => { return axios.get(`${base}/loves`, {pa
 export const addLove = params => { return axios.post(`${base}/loves`, {params: params}); };
 export const editLove = params => { return axios.post(`${base}/loves`, {params: params}); };
 
-export const removeLove = params => { return axios.post(`${base}/loves`, {params: params}); };
-export const batchRemoveLove = params => { return axios.post(`${base}/loves`, {params: params}); };
+export const removeLove = params => { return axios.post(`${base}/delete/love`, {params: params}); };
+export const batchRemoveLove = params => { return axios.post(`${base}/delete/loves`, {params: params}); };
+
+
+
+export const getCommentsList = params => { return axios.get(`${base}/comments`, {params: params}); };
+export const addComment = params => { return axios.post(`${base}/loves`, {params: params}); };
+export const editComment = params => { return axios.post(`${base}/loves`, {params: params}); };
+
+export const removeComment = params => { return axios.post(`${base}/delete/comment`, {params: params}); };
+export const batchRemoveComment = params => { return axios.post(`${base}/delete/comments`, {params: params}); };
+
+
 
 
 

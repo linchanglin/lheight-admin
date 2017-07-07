@@ -33,19 +33,19 @@
             </el-table-column>
             <el-table-column prop="comment_nums" label="评论数" width="100" sortable>
                 <template scope="scope" sortable>
-                    <router-link :to="{ path: 'comments', params: { loveId: scope.row.id }}">{{scope.row.comment_nums}}</router-link>
+                    <router-link :to="{ name: '评论管理', params: { id: scope.row.id }}">{{scope.row.comment_nums}}</router-link>
                 </template>
             </el-table-column>
             <el-table-column prop="praise_nums" label="喜欢数" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="read_nums" label="阅读数" width="100" sortable>
-            </el-table-column>
+            <!--<el-table-column prop="read_nums" label="阅读数" width="100" sortable>
+            </el-table-column>-->
             <el-table-column prop="available" label="可见" width="100" :formatter="formatAvailable" sortable>
             </el-table-column>
             <el-table-column label="创建人" width="100">
                 <template scope="scope" sortable>
                     <!--<el-button  type="text">{{scope.row.userInfo.nickname}}</el-button>-->
-                    <router-link :to="{ path: 'comments', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
+                    <router-link :to="{ path: 'user', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
                     
                 </template>
                 <!--<router-link :to="{ name: 'user', params: { userId: userInfo.id }}">{{userInfo.nickname}}</router-link>-->
@@ -179,7 +179,7 @@ export default {
             return row.anonymous == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
         },
         formatAvailable: function (row, column) {
-            return row.available == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
+            return row.available == 1 ? '是' : row.available == 0 ? '否' : '未知';
         },
         handleCurrentChange(val) {
             this.page = val;
@@ -287,7 +287,8 @@ export default {
         },
         //批量删除
         batchRemove: function () {
-            var ids = this.sels.map(item => item.id).toString();
+            // var ids = this.sels.map(item => item.id).toString();
+            var ids = this.sels.map(item => item.id);
             this.$confirm('确认删除选中记录吗？', '提示', {
                 type: 'warning'
             }).then(() => {

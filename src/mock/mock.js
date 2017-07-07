@@ -66,47 +66,85 @@ export default {
         resolve([200, {
           data: [
             {
-            id: 10,
-            content: "三月，醉一场青春的流年。慢步在三月的春光里，走走停停，看花开嫣然",
-            belongsToMe: 0,
-            video_url: null,
-            images: [],
-            userInfo: {
-              id: 1,
-              nickname: "福大君",
-              avatarUrl: "http://cdn.collhome.com/love356.png",
-              college: "福州大学"
+              id: 10,
+              content: "三月，醉一场青春的流年。慢步在三月的春光里，走走停停，看花开嫣然",
+              belongsToMe: 0,
+              video_url: null,
+              images: [],
+              userInfo: {
+                id: 1,
+                nickname: "福大君",
+                avatarUrl: "http://cdn.collhome.com/love356.png",
+                college: "福州大学"
+              },
+              created_at: "07-01 00:01",
+              praise_nums: "409",
+              comment_nums: "1",
+              if_my_comment: 0,
+              if_my_praise: 0,
+              location: "",
+              anonymous: 1,
+              available: 1,
             },
-            created_at: "07-01 00:01",
-            praise_nums: "409",
-            comment_nums: "1",
-            if_my_comment: 0,
-            if_my_praise: 0,
-            location: "",
-            anonymous: 1,
-            available: 1,
-          },
-          {
-            id: 9,
-            content: "福州高校表白墙 图片",
-            belongsToMe: 0,
-            video_url: null,
-            images: [],
-            userInfo: {
-              id: 1,
-              nickname: "师大君",
-              avatarUrl: "http://cdn.collhome.com/love356.png",
-              college: "福州大学"
+            {
+              id: 9,
+              content: "福州高校表白墙 图片",
+              belongsToMe: 0,
+              video_url: null,
+              images: [],
+              userInfo: {
+                id: 1,
+                nickname: "师大君",
+                avatarUrl: "http://cdn.collhome.com/love356.png",
+                college: "福州大学"
+              },
+              created_at: "07-01 00:01",
+              praise_nums: "409",
+              comment_nums: "1",
+              if_my_comment: 0,
+              if_my_praise: 0,
+              location: "",
+              anonymous: 0,
+              available: 0,
+            }
+          ]
+        }]);
+      });
+    });
+
+
+    //用户某条表白的评论
+    mock.onGet('/comments').reply(config => {
+      let { id } = config.params;
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+              id: 10,
+              content: "这里是评论1.     三月，醉一场青春的流年。慢步在三月的春光里，走走停停，看花开嫣然",
+              userInfo: {
+                id: 1,
+                nickname: "刘亦菲",
+                avatarUrl: "http://cdn.collhome.com/love356.png",
+              },
+              created_at: "07-01 00:01",
+              praise_nums: "409",
+              reply_nums: "1",
+              available: 1,
             },
-            created_at: "07-01 00:01",
-            praise_nums: "409",
-            comment_nums: "1",
-            if_my_comment: 0,
-            if_my_praise: 0,
-            location: "",
-            anonymous: 0,
-            available: 0,
-          }
+            {
+              id: 9,
+              content: "这里是评论2.     福州高校表白墙 图片",
+              userInfo: {
+                id: 1,
+                nickname: "赵丽颖",
+                avatarUrl: "http://cdn.collhome.com/love356.png",
+              },
+              created_at: "07-01 00:01",
+              praise_nums: "409",
+              reply_nums: "1",
+              available: 0,
+            }
           ]
         }]);
       });
