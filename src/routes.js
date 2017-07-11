@@ -13,6 +13,7 @@ import echarts from './views/charts/echarts.vue'
 import Loves from './views/pages/loves.vue'
 import Comments from './views/pages/comments.vue'
 import Replies from './views/pages/replies.vue'
+import SystemNotices from './views/pages/systemNotices.vue'
 import AboutLoveWall from './views/pages/comments.vue'
 
 let routes = [
@@ -78,7 +79,7 @@ let routes = [
         iconCls: 'fa fa-comments-o',
         leaf: true,//只有一个节点
         children: [
-            { path: '/replies', component: Replies, name: '回复管理' }
+            { path: '/comments/:id/replies', component: Replies, name: '回复管理' }
         ]
     },
     {
@@ -88,7 +89,7 @@ let routes = [
         iconCls: 'fa fa-bell',
         leaf: true,//只有一个节点
         children: [
-            { path: '/systemNotices', component: Table, name: '系统通知' }
+            { path: '/systemNotices', component: SystemNotices, name: '系统通知' }
         ]
     },
     {

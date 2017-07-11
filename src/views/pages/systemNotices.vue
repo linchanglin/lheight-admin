@@ -1,59 +1,37 @@
 <template>
     <section>
         <!--工具条-->
-        <el-col :span="24" class="toolbar" style="padding: 0 10px;">
-            <div style="font-size: 15px;">
-                <p>
-                    <span>{{comment.userInfo.nickname}}:</span>
-                    <span>{{comment.content}}</span>
-                </p>
-            </div>
-            <!--<el-form :inline="true" :model="filters">
-                <el-form-item>
-                    <el-input v-model="filters.search" placeholder="内容"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" v-on:click="getReplies">查询</el-button>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="handleAdd">新增</el-button>
-                </el-form-item>
-            </el-form>-->
-        </el-col>
-
-        <!--工具条-->
-        <!--<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+        <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <el-form-item>
                     <el-input v-model="filters.search" placeholder="内容"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" v-on:click="getReplies">查询</el-button>
+                    <el-button type="primary" v-on:click="getSystemNotices">查询</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="handleAdd">新增</el-button>
                 </el-form-item>
             </el-form>
-        </el-col>-->
+        </el-col>
     
         <!--列表-->
-        <el-table :data="replies" border highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+        <el-table :data="systemNotices" border highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
+            <el-table-column prop="type" label="类型" width="100" sortable>
+            </el-table-column>
+            <el-table-column prop="title" label="标题" width="100" sortable>
+            </el-table-column>
             <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
-            <el-table-column label="回复对象" width="100">
-                <template scope="scope">
-                    <router-link :to="{ path: 'user', params: { userId: scope.row.objectUserInfo.id }}">{{scope.row.objectUserInfo.nickname}}</router-link>
-                </template>
+            <el-table-column prop="image" label="图片" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="praise_nums" label="喜欢数" width="100" sortable>
+            <el-table-column prop="video_url" label="视频" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="available" label="可见" width="100" :formatter="formatAvailable" sortable>
-            </el-table-column>
-            <el-table-column label="创建人" width="100">
+            <el-table-column label="对象" width="100">
                 <template scope="scope">
                     <router-link :to="{ path: 'user', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
                 </template>
@@ -81,6 +59,30 @@
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
+                <!--<el-form-item label="图片">
+                    <el-input type="textarea" v-model="editForm.images"></el-input>
+                </el-form-item>-->
+                <el-form-item label="视频地址">
+                    <el-input type="textarea" autosize v-model="editForm.video_url"></el-input>
+                </el-form-item>
+                <!--<el-form-item label="位置">
+                    <el-input v-model="editForm.location" auto-complete="off"></el-input>
+                </el-form-item>-->
+                <el-form-item label="匿名">
+                    <el-radio-group v-model="editForm.anonymous">
+                        <el-radio class="radio" :label="1">是</el-radio>
+                        <el-radio class="radio" :label="0">否</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <!--<el-form-item label="评论数">
+                    <el-input v-model="editForm.comment_nums" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="喜欢数">
+                    <el-input v-model="editForm.praise_nums" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="阅读数">
+                    <el-input v-model="editForm.read_nums" auto-complete="off"></el-input>
+                </el-form-item>-->
                 <el-form-item label="可见性">
                     <el-radio-group v-model="editForm.available">
                         <el-radio class="radio" :label="1">是</el-radio>
@@ -100,6 +102,15 @@
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="addForm.content"></el-input>
                 </el-form-item>
+                <el-form-item label="视频地址">
+                    <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
+                </el-form-item>
+                <el-form-item label="匿名">
+                    <el-radio-group v-model="addForm.anonymous">
+                        <el-radio class="radio" :label="1">是</el-radio>
+                        <el-radio class="radio" :label="0">否</el-radio>
+                    </el-radio-group>
+                </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click.native="addFormVisible = false">取消</el-button>
@@ -113,7 +124,7 @@
 import util from '../../common/js/util'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-import { getComment, getRepliesList, removeReply, batchRemoveReply, editReply, addReply } from '../../api/api';
+import { getSystemNoticesList, removeSystemNotice, batchRemoveSystemNotice, editSystemNotice, addSystemNotice } from '../../api/api';
 
 export default {
     data() {
@@ -121,12 +132,7 @@ export default {
             filters: {
                 search: ''
             },
-            comment: {
-                content: '',
-                userInfo: {
-                }
-            },
-            replies: [],
+            systemNotices: [],
             total: 0,
             page: 1,
             listLoading: false,
@@ -155,37 +161,27 @@ export default {
     },
     methods: {
         //是否显示转换
+        formatAnonymous: function (row, column) {
+            return row.anonymous == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
+        },
         formatAvailable: function (row, column) {
             return row.available == 1 ? '是' : row.available == 0 ? '否' : '未知';
         },
         handleCurrentChange(val) {
             this.page = val;
-            this.getReplies();
+            this.getSystemNotices();
         },
-        //获取评论
-        getComment() {
+        //获取表白列表
+        getSystemNotices() {
             let para = {
-                id: this.$route.params.id,
-            };
-            console.log('para ss', para);
-            getComment(para).then((res) => {
-                console.log('getComment res', res);
-                this.comment = res.data.data;
-            });
-        },
-        //获取回复列表
-        getReplies() {
-            let para = {
-                id: this.$route.params.id,
                 page: this.page,
                 search: this.filters.search
             };
-            console.log('para', para);
             this.listLoading = true;
-            getRepliesList(para).then((res) => {
-                console.log('getRepliesList res', res);
+            getSystemNoticesList(para).then((res) => {
+                console.log('getSystemNoticesList res', res);
                 this.total = res.data.dataLength;
-                this.replies = res.data.data;
+                this.systemNotices = res.data.data;
                 this.listLoading = false;
             });
 
@@ -198,14 +194,14 @@ export default {
                 this.listLoading = true;
                 //NProgress.start();
                 let para = { id: row.id };
-                removeReply(para).then((res) => {
+                removeSystemNotice(para).then((res) => {
                     this.listLoading = false;
                     //NProgress.done();
                     this.$message({
                         message: '删除成功',
                         type: 'success'
                     });
-                    this.getReplies();
+                    this.getSystemNotices();
                 });
             }).catch(() => {
 
@@ -220,7 +216,9 @@ export default {
         handleAdd: function () {
             this.addFormVisible = true;
             this.addForm = {
-                content: ''
+                content: '',
+                video_url: '',
+                anonymous: 0
             };
         },
         //编辑
@@ -231,7 +229,7 @@ export default {
                         this.editLoading = true;
                         //NProgress.start();
                         let para = Object.assign({}, this.editForm);
-                        editReply(para).then((res) => {
+                        editSystemNotice(para).then((res) => {
                             this.editLoading = false;
                             //NProgress.done();
                             this.$message({
@@ -240,7 +238,7 @@ export default {
                             });
                             this.$refs['editForm'].resetFields();
                             this.editFormVisible = false;
-                            this.getReplies();
+                            this.getSystemNotices();
                         });
                     });
                 }
@@ -254,7 +252,7 @@ export default {
                         this.addLoading = true;
                         //NProgress.start();
                         let para = Object.assign({}, this.addForm);
-                        addReply(para).then((res) => {
+                        addSystemNotice(para).then((res) => {
                             this.addLoading = false;
                             //NProgress.done();
                             this.$message({
@@ -263,7 +261,7 @@ export default {
                             });
                             this.$refs['addForm'].resetFields();
                             this.addFormVisible = false;
-                            this.getReplies();
+                            this.getSystemNotices();
                         });
                     });
                 }
@@ -282,14 +280,14 @@ export default {
                 this.listLoading = true;
                 //NProgress.start();
                 let para = { ids: ids };
-                batchRemoveReply(para).then((res) => {
+                batchRemoveSystemNotice(para).then((res) => {
                     this.listLoading = false;
                     //NProgress.done();
                     this.$message({
                         message: '删除成功',
                         type: 'success'
                     });
-                    this.getReplies();
+                    this.getSystemNotices();
                 });
             }).catch(() => {
 
@@ -297,8 +295,7 @@ export default {
         }
     },
     mounted() {
-        this.getComment();
-        this.getReplies();
+        this.getSystemNotices();
     }
 }
 

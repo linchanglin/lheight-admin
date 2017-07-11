@@ -1,19 +1,41 @@
 <template>
     <section>
+    
         <!--工具条-->
-        <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-            <el-form :inline="true" :model="filters">
-                <el-form-item>
-                    <el-input v-model="filters.search" placeholder="内容"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" v-on:click="getComments">查询</el-button>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="handleAdd">新增</el-button>
-                </el-form-item>
-            </el-form>
+        <el-col :span="24" class="toolbar" style="padding: 0 10px;">
+            <div style="font-size: 15px;">
+                <p>
+                    <span>{{love.userInfo.nickname}}:</span>
+                    <span>{{love.content}}</span>
+                </p>
+            </div>
+            <!--<el-form :inline="true" :model="filters">
+                    <el-form-item>
+                        <el-input v-model="filters.search" placeholder="内容"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" v-on:click="getComments">查询</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="handleAdd">新增</el-button>
+                    </el-form-item>
+                </el-form>-->
         </el-col>
+    
+        <!--工具条-->
+        <!--<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+                    <el-form :inline="true" :model="filters">
+                        <el-form-item>
+                            <el-input v-model="filters.search" placeholder="内容"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" v-on:click="getComments">查询</el-button>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="handleAdd">新增</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-col>-->
     
         <!--列表-->
         <el-table :data="comments" border highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
@@ -23,9 +45,9 @@
             </el-table-column>
             <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="reply_nums" label="回复数" width="100" sortable>
-                <template scope="scope" sortable>
-                    <router-link :to="{ path: '/comments/:id/replies', params: { id: scope.row.id }}">{{scope.row.reply_nums}}</router-link>
+            <el-table-column prop="reply_nums" label="回复数" width="100">
+                <template scope="scope">
+                    <router-link :to="{ name: '回复管理', params: { id: scope.row.id }}">{{scope.row.reply_nums}}</router-link>
                 </template>
             </el-table-column>
             <el-table-column prop="praise_nums" label="喜欢数" width="100" sortable>
@@ -33,7 +55,7 @@
             <el-table-column prop="available" label="可见" width="100" :formatter="formatAvailable" sortable>
             </el-table-column>
             <el-table-column label="创建人" width="100">
-                <template scope="scope" sortable>
+                <template scope="scope">
                     <router-link :to="{ path: 'user', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
                 </template>
             </el-table-column>
@@ -92,13 +114,18 @@
 import util from '../../common/js/util'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-import { getCommentsList, removeComment, batchRemoveComment, editComment, addComment } from '../../api/api';
+import { getLove, getCommentsList, removeComment, batchRemoveComment, editComment, addComment } from '../../api/api';
 
 export default {
     data() {
         return {
             filters: {
                 search: ''
+            },
+            love: {
+                content: '',
+                userInfo: {
+                }
             },
             comments: [],
             total: 0,
@@ -136,14 +163,25 @@ export default {
             this.page = val;
             this.getComments();
         },
-        //获取表白列表
+        //获取表白
+        getLove() {
+            let para = {
+                id: this.$route.params.id,
+            };
+            console.log('para ss', para);
+            getLove(para).then((res) => {
+                console.log('getLove res', res);
+                this.love = res.data.data;
+            });
+        },
+        //获取评论列表
         getComments() {
             let para = {
                 id: this.$route.params.id,
                 page: this.page,
                 search: this.filters.search
             };
-            console.log('para', para);
+            console.log('para ddx', para);
             this.listLoading = true;
             getCommentsList(para).then((res) => {
                 console.log('getCommentsList res', res);
@@ -151,7 +189,6 @@ export default {
                 this.comments = res.data.data;
                 this.listLoading = false;
             });
-
         },
         //删除
         handleDel: function (row) {
@@ -260,6 +297,7 @@ export default {
         }
     },
     mounted() {
+        this.getLove();
         this.getComments();
     }
 }

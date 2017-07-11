@@ -31,8 +31,8 @@
             </el-table-column>
             <el-table-column prop="anonymous" label="匿名" width="100" :formatter="formatAnonymous" sortable>
             </el-table-column>
-            <el-table-column prop="comment_nums" label="评论数" width="100" sortable>
-                <template scope="scope" sortable>
+            <el-table-column prop="comment_nums" label="评论数" width="100">
+                <template scope="scope">
                     <router-link :to="{ name: '评论管理', params: { id: scope.row.id }}">{{scope.row.comment_nums}}</router-link>
                 </template>
             </el-table-column>
@@ -43,7 +43,7 @@
             <el-table-column prop="available" label="可见" width="100" :formatter="formatAvailable" sortable>
             </el-table-column>
             <el-table-column label="创建人" width="100">
-                <template scope="scope" sortable>
+                <template scope="scope">
                     <!--<el-button  type="text">{{scope.row.userInfo.nickname}}</el-button>-->
                     <router-link :to="{ path: 'user', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
                     
