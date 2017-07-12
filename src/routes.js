@@ -13,6 +13,7 @@ import echarts from './views/charts/echarts.vue'
 import Loves from './views/pages/loves.vue'
 import Comments from './views/pages/comments.vue'
 import Replies from './views/pages/replies.vue'
+import Users from './views/pages/users.vue'
 import SystemNotices from './views/pages/systemNotices.vue'
 import AboutLoveWall from './views/pages/comments.vue'
 
@@ -109,7 +110,27 @@ let routes = [
         iconCls: 'fa fa-user',
         leaf: true,//只有一个节点
         children: [
-            { path: '/users', component: Table, name: '用户管理' }
+            { path: '/users', component: Users, name: '用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-user',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/users', component: Table, name: '管理员介绍' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-user',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/users', component: Table, name: '相关小程序' }
         ]
     },
     {

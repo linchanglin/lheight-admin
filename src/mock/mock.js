@@ -296,6 +296,93 @@ export default {
     });
 
 
+    //获取用户列表
+    mock.onGet('/users').reply(config => {
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+              id: 1,
+              praise_nums: 0,
+              nickname: "福大君",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 0,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+            {
+              id: 2,
+              praise_nums: 0,
+              nickname: "师大君",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 0,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+          ]
+        }]);
+      });
+    });
+
+
 
     //获取用户列表（分页）
     mock.onGet('/user/listpage').reply(config => {

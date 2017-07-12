@@ -63,6 +63,12 @@ export const editSystemNotice = params => { return axios.post(`${base}/systemNot
 export const removeSystemNotice = params => { return axios.post(`${base}/delete/systemNotice`, {params: params}); };
 export const batchRemoveSystemNotice = params => { return axios.post(`${base}/delete/systemNotices`, {params: params}); };
 
+export const getUsersList = params => { return axios.get(`${base}/users`, {params: params}); };
+export const addUser = params => { return axios.post(`${base}/users`, {params: params}); };
+export const editUser = params => { return axios.post(`${base}/users`, {params: params}); };
+export const removeUser = params => { return axios.post(`${base}/delete/user`, {params: params}); };
+export const batchRemoveUser = params => { return axios.post(`${base}/delete/users`, {params: params}); };
+
 
 
 
