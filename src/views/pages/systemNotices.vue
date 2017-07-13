@@ -23,18 +23,16 @@
             </el-table-column>
             <el-table-column prop="type" label="类型" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="title" label="标题" width="100" sortable>
-            </el-table-column>
-            <el-table-column prop="content" label="内容" min-width="120" sortable>
-            </el-table-column>
-            <el-table-column prop="image" label="图片" width="100" sortable>
-            </el-table-column>
-            <el-table-column prop="video_url" label="视频" width="100" sortable>
-            </el-table-column>
             <el-table-column label="对象" width="100">
                 <template scope="scope">
                     <router-link :to="{ path: 'user', params: { userId: scope.row.userInfo.id }}">{{scope.row.userInfo.nickname}}</router-link>
                 </template>
+            </el-table-column>
+            <el-table-column prop="image" label="图片" min-width="120" sortable>
+            </el-table-column>
+            <el-table-column prop="video_url" label="视频" min-width="120" sortable>
+            </el-table-column>
+            <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="created_at" label="创建时间" width="120" sortable>
             </el-table-column>
@@ -56,38 +54,20 @@
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-                <el-form-item label="内容">
-                    <el-input type="textarea" autosize v-model="editForm.content"></el-input>
+                <el-form-item label="类型">
+                    <el-input v-model="editForm.type"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="图片">
-                    <el-input type="textarea" v-model="editForm.images"></el-input>
-                </el-form-item>-->
-                <el-form-item label="视频地址">
+                <el-form-item label="对象ID">
+                    <el-input v-model="editForm.user_id"></el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                    <el-input type="textarea" autosize v-model="editForm.image"></el-input>
+                </el-form-item>
+                <el-form-item label="视频">
                     <el-input type="textarea" autosize v-model="editForm.video_url"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="位置">
-                    <el-input v-model="editForm.location" auto-complete="off"></el-input>
-                </el-form-item>-->
-                <el-form-item label="匿名">
-                    <el-radio-group v-model="editForm.anonymous">
-                        <el-radio class="radio" :label="1">是</el-radio>
-                        <el-radio class="radio" :label="0">否</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <!--<el-form-item label="评论数">
-                    <el-input v-model="editForm.comment_nums" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="喜欢数">
-                    <el-input v-model="editForm.praise_nums" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="阅读数">
-                    <el-input v-model="editForm.read_nums" auto-complete="off"></el-input>
-                </el-form-item>-->
-                <el-form-item label="可见性">
-                    <el-radio-group v-model="editForm.available">
-                        <el-radio class="radio" :label="1">是</el-radio>
-                        <el-radio class="radio" :label="0">否</el-radio>
-                    </el-radio-group>
+                <el-form-item label="内容">
+                    <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -99,17 +79,20 @@
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-                <el-form-item label="内容">
-                    <el-input type="textarea" autosize v-model="addForm.content"></el-input>
+                <el-form-item label="类型">
+                    <el-input v-model="addForm.type"></el-input>
                 </el-form-item>
-                <el-form-item label="视频地址">
+                <el-form-item label="对象ID">
+                    <el-input v-model="addForm.user_id"></el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                    <el-input type="textarea" autosize v-model="addForm.image"></el-input>
+                </el-form-item>
+                <el-form-item label="视频">
                     <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
                 </el-form-item>
-                <el-form-item label="匿名">
-                    <el-radio-group v-model="addForm.anonymous">
-                        <el-radio class="radio" :label="1">是</el-radio>
-                        <el-radio class="radio" :label="0">否</el-radio>
-                    </el-radio-group>
+                <el-form-item label="内容">
+                    <el-input type="textarea" autosize v-model="addForm.content"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -216,9 +199,11 @@ export default {
         handleAdd: function () {
             this.addFormVisible = true;
             this.addForm = {
-                content: '',
+                type: '',
+                user_id: '',
+                image: '',
                 video_url: '',
-                anonymous: 0
+                content: '',
             };
         },
         //编辑
@@ -229,6 +214,7 @@ export default {
                         this.editLoading = true;
                         //NProgress.start();
                         let para = Object.assign({}, this.editForm);
+                        console.log('editSubmit para', para);
                         editSystemNotice(para).then((res) => {
                             this.editLoading = false;
                             //NProgress.done();
@@ -252,6 +238,7 @@ export default {
                         this.addLoading = true;
                         //NProgress.start();
                         let para = Object.assign({}, this.addForm);
+                        console.log('addSubmit para', para);
                         addSystemNotice(para).then((res) => {
                             this.addLoading = false;
                             //NProgress.done();

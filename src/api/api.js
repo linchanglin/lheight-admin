@@ -63,11 +63,29 @@ export const editSystemNotice = params => { return axios.post(`${base}/systemNot
 export const removeSystemNotice = params => { return axios.post(`${base}/delete/systemNotice`, {params: params}); };
 export const batchRemoveSystemNotice = params => { return axios.post(`${base}/delete/systemNotices`, {params: params}); };
 
+export const getRelatedAppletsList = params => { return axios.get(`${base}/relatedApplets`, {params: params}); };
+export const addRelatedApplet = params => { return axios.post(`${base}/relatedApplets`, {params: params}); };
+export const editRelatedApplet = params => { return axios.post(`${base}/relatedApplets`, {params: params}); };
+export const removeRelatedApplet = params => { return axios.post(`${base}/delete/relatedApplet`, {params: params}); };
+export const batchRemoveRelatedApplet = params => { return axios.post(`${base}/delete/relatedApplets`, {params: params}); };
+
+export const getAboutLoveWallsList = params => { return axios.get(`${base}/aboutLoveWalls`, {params: params}); };
+export const addAboutLoveWall = params => { return axios.post(`${base}/aboutLoveWalls`, {params: params}); };
+export const editAboutLoveWall = params => { return axios.post(`${base}/aboutLoveWalls`, {params: params}); };
+export const removeAboutLoveWall = params => { return axios.post(`${base}/delete/aboutLoveWall`, {params: params}); };
+export const batchRemoveAboutLoveWall = params => { return axios.post(`${base}/delete/aboutLoveWalls`, {params: params}); };
+
 export const getUsersList = params => { return axios.get(`${base}/users`, {params: params}); };
 export const addUser = params => { return axios.post(`${base}/users`, {params: params}); };
 export const editUser = params => { return axios.post(`${base}/users`, {params: params}); };
 export const removeUser = params => { return axios.post(`${base}/delete/user`, {params: params}); };
 export const batchRemoveUser = params => { return axios.post(`${base}/delete/users`, {params: params}); };
+
+export const getCollegeUsersList = params => { return axios.get(`${base}/collegeUsers`, {params: params}); };
+export const addCollegeUser = params => { return axios.post(`${base}/collegeUsers`, {params: params}); };
+export const editCollegeUser = params => { return axios.post(`${base}/collegeUsers`, {params: params}); };
+export const removeCollegeUser = params => { return axios.post(`${base}/delete/collegeUser`, {params: params}); };
+export const batchRemoveCollegeUser = params => { return axios.post(`${base}/delete/collegeUsers`, {params: params}); };
 
 
 
