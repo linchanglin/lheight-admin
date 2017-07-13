@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-let base = '/admin-loves/apis';
+// let base = '/admin-loves/apis';
 
-// let base = '';
+let base = '';
 
 
 

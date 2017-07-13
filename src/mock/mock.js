@@ -82,7 +82,12 @@ export default {
               comment_nums: "1",
               if_my_comment: 0,
               if_my_praise: 0,
-              location: "",
+              location: {
+                address: "福建省福州市闽侯县大学城学园路2号",
+                latitude:"26.059804672786",
+                longitude:"119.19780624505",
+                name:"福州大学",
+              },
               anonymous: 1,
               available: 1,
             },

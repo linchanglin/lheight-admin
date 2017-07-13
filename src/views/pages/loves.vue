@@ -27,7 +27,7 @@
             </el-table-column>
             <el-table-column prop="video_url" label="视频" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="location" label="位置" width="100" sortable>
+            <el-table-column prop="location.name" label="位置" width="100" sortable>
             </el-table-column>
             <el-table-column prop="anonymous" label="匿名" width="100" :formatter="formatAnonymous" sortable>
             </el-table-column>
