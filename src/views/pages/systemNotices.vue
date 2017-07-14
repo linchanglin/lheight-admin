@@ -55,7 +55,7 @@
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
                 <el-form-item label="类型">
-                    <el-input v-model="editForm.type"></el-input>
+                    <el-input v-model="editForm.type" placeholder="请输入数字0或1，0表示对所有用户，1表示对单一用户"></el-input>
                 </el-form-item>
                 <el-form-item label="对象ID">
                     <el-input v-model="editForm.user_id"></el-input>
