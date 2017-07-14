@@ -23,11 +23,11 @@
             </el-table-column>
             <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="images" label="图片" width="100" sortable>
+            <el-table-column prop="images" label="图片" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="video_url" label="视频" width="100" sortable>
+            <el-table-column prop="video_url" label="视频" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="location.name" label="位置" width="100" sortable>
+            <el-table-column prop="location.name" label="位置" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="anonymous" label="匿名" width="100" :formatter="formatAnonymous" sortable>
             </el-table-column>
