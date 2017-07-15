@@ -26,16 +26,16 @@ let siderBar = [
             { path: '/systemNotices', component: Loves, name: '系统通知' }
         ]
     },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-exclamation-circle',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/badReports', component: Loves, name: '举报处理' }
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '',
+    //     iconCls: 'fa fa-exclamation-circle',
+    //     leaf: true,//只有一个节点
+    //     children: [
+    //         { path: '/badReports', component: Loves, name: '举报处理' }
+    //     ]
+    // },
     {
         path: '/',
         component: Home,
@@ -50,12 +50,32 @@ let siderBar = [
         path: '/',
         component: Home,
         name: '',
+        iconCls: 'fa fa-university',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/collegeUsers', component: Loves, name: '学校用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-rocket',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/relatedApplets', component: Loves, name: '相关小程序' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
         iconCls: 'fa fa-home',
         leaf: true,//只有一个节点
         children: [
-            { path: '/aboutLoveWall', component: AboutLoveWall, name: '关于表白墙' }
+            { path: '/aboutLoveWalls', component: AboutLoveWall, name: '关于表白墙' }
         ]
-    }
+    },
 ];
 
 export default siderBar;

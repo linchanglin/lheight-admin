@@ -82,7 +82,12 @@ export default {
               comment_nums: "1",
               if_my_comment: 0,
               if_my_praise: 0,
-              location: "",
+              location: {
+                address: "福建省福州市闽侯县大学城学园路2号",
+                latitude:"26.059804672786",
+                longitude:"119.19780624505",
+                name:"福州大学",
+              },
               anonymous: 1,
               available: 1,
             },
@@ -290,6 +295,301 @@ export default {
               },
               created_at: "07-01 00:01",
             }
+          ]
+        }]);
+      });
+    });
+
+    //获取相关小程序列表
+    mock.onGet('/relatedApplets').reply(config => {
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+              id: 1,
+              appId: 'wx7f02895dae7c918a',
+              name: '福州高校表白墙',
+              avatarUrl: "http://cdn.collhome.com/love356.png",
+              summary: '简介1',
+            },
+            {
+              id: 2,
+              appId: 'wx7f02895dae7c918a',
+              name: '上海大学生表白墙',
+              avatarUrl: "http://cdn.collhome.com/love356.png",
+              summary: '简介1',
+            }
+          ]
+        }]);
+      });
+    });
+
+    //获取关于表白墙列表
+    mock.onGet('/aboutLoveWalls').reply(config => {
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+              id: 1,
+              image: 'http://cdn.collhome.com/love356.png',
+              video_url: 'http://cdn.collhome.com/love356.png',
+              content: "上海大学生表白墙",
+            },
+            {
+              id: 2,
+              image: 'http://cdn.collhome.com/love356.png',
+              video_url: 'http://cdn.collhome.com/love356.png',
+              content: "北京大学生表白墙",
+            }
+          ]
+        }]);
+      });
+    });
+
+
+    //获取用户列表
+    mock.onGet('/users').reply(config => {
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+              id: 1,
+              praise_nums: 0,
+              nickname: "福大君",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 0,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+            {
+              id: 2,
+              praise_nums: 0,
+              nickname: "师大君",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 0,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+            {
+              id: 3,
+              praise_nums: 0,
+              nickname: "小宝宝",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 1,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+          ]
+        }]);
+      });
+    });
+
+    //获取用户列表
+    mock.onGet('/collegeUsers').reply(config => {
+      return new Promise((resolve, reject) => {
+        resolve([200, {
+          data: [
+            {
+              id: 1,
+              praise_nums: 0,
+              nickname: "福大君",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 0,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+            {
+              id: 2,
+              praise_nums: 0,
+              nickname: "师大君",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 0,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
+            {
+              id: 3,
+              praise_nums: 0,
+              nickname: "小宝宝",
+              avatarUrl: "http://cdn.collhome.com/love.png",
+              gender: "",
+              gender_name: "",
+              pictures: [],
+              province: "",
+              city: "",
+              country: "中国",
+              realname: "福大君",
+              college: 1,
+              college_name: "福州大学",
+              major: "",
+              grade: "",
+              grade_name: "",
+              wechat: "",
+              qq: "",
+              weibo: "",
+              mobilePhone: "",
+              role: 1,
+              trust: 1,
+              available: 1,
+              birthday: "",
+              height: "",
+              weight: "",
+              hometown: "",
+              signature: "哈哈，我是表白君。您匿名发表表白的时候将以我的名义发表哒！",
+              character: "",
+              hobby: "",
+              love_history: "",
+              love_selecting: "",
+              age: "",
+              constellation: "",
+              if_my_praise: 0,
+              inMyBlackList: 0
+            },
           ]
         }]);
       });

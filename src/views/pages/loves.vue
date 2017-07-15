@@ -23,11 +23,11 @@
             </el-table-column>
             <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="images" label="图片" width="100" sortable>
+            <el-table-column prop="images" label="图片" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="video_url" label="视频" width="100" sortable>
+            <el-table-column prop="video_url" label="视频" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="location" label="位置" width="100" sortable>
+            <el-table-column prop="location.name" label="位置" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="anonymous" label="匿名" width="100" :formatter="formatAnonymous" sortable>
             </el-table-column>
@@ -70,12 +70,15 @@
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+                <el-form-item label="用户ID">
+                    <el-input v-model="editForm.user_id"></el-input>
+                </el-form-item>
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="图片">
-                    <el-input type="textarea" v-model="editForm.images"></el-input>
-                </el-form-item>-->
+                <el-form-item label="图片">
+                    <el-input type="textarea" autosize v-model="editForm.images"></el-input>
+                </el-form-item>
                 <el-form-item label="视频地址">
                     <el-input type="textarea" autosize v-model="editForm.video_url"></el-input>
                 </el-form-item>
@@ -113,8 +116,14 @@
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+                <el-form-item label="用户ID">
+                    <el-input v-model="addForm.user_id"></el-input>
+                </el-form-item>
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="addForm.content"></el-input>
+                </el-form-item>
+                <el-form-item label="图片">
+                    <el-input type="textarea" autosize v-model="addForm.images"></el-input>
                 </el-form-item>
                 <el-form-item label="视频地址">
                     <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
@@ -231,9 +240,12 @@ export default {
         handleAdd: function () {
             this.addFormVisible = true;
             this.addForm = {
+                user_id: '',
                 content: '',
+                images: '',
                 video_url: '',
-                anonymous: 0
+                anonymous: 0,
+                available: 1,
             };
         },
         //编辑

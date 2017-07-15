@@ -13,8 +13,11 @@ import echarts from './views/charts/echarts.vue'
 import Loves from './views/pages/loves.vue'
 import Comments from './views/pages/comments.vue'
 import Replies from './views/pages/replies.vue'
+import Users from './views/pages/users.vue'
+import CollegeUsers from './views/pages/collegeUsers.vue'
 import SystemNotices from './views/pages/systemNotices.vue'
-import AboutLoveWall from './views/pages/comments.vue'
+import RelatedApplets from './views/pages/relatedApplets.vue'
+import AboutLoveWalls from './views/pages/aboutLoveWalls.vue'
 
 let routes = [
     {
@@ -39,29 +42,6 @@ let routes = [
             { path: '/loves', component: Loves, name: '表白管理' }
         ]
     },
-    //{ path: '/main', component: Main },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '表白管理',
-    //     iconCls: 'fa fa-heart',
-    //     children: [
-    //         { path: '/newLoves', component: Loves, name: '最新' },
-    //         { path: '/hotLoves', component: Loves, name: '热门' },
-    //         { path: '/imageLoves', component: Loves, name: '图片' },
-    //         { path: '/videoLoves', component: Loves, name: '视频' },
-    //     ]
-    // },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '',
-    //     iconCls: 'fa fa-comment',
-    //     leaf: true,//只有一个节点
-    //     children: [
-    //         { path: '/comments', component: Table, name: '评论管理' }
-    //     ]
-    // },
     {
         path: '/',
         component: Home,
@@ -109,7 +89,27 @@ let routes = [
         iconCls: 'fa fa-user',
         leaf: true,//只有一个节点
         children: [
-            { path: '/users', component: Table, name: '用户管理' }
+            { path: '/users', component: Users, name: '用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-university',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/collegeUsers', component: CollegeUsers, name: '学校用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-user',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/relatedApplets', component: RelatedApplets, name: '相关小程序' }
         ]
     },
     {
@@ -119,52 +119,9 @@ let routes = [
         iconCls: 'fa fa-home',
         leaf: true,//只有一个节点
         children: [
-            { path: '/aboutLoveWall', component: AboutLoveWall, name: '关于表白墙' }
+            { path: '/aboutLoveWalls', component: AboutLoveWalls, name: '关于表白墙' }
         ]
     },
-
-
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '导航一',
-    //     iconCls: 'el-icon-message',//图标样式class
-    //     children: [
-    //         { path: '/main', component: Main, name: '主页', hidden: true },
-    //         { path: '/table', component: Table, name: 'Table' },
-    //         { path: '/form', component: Form, name: 'Form' },
-    //         { path: '/user', component: user, name: '列表' },
-    //     ]
-    // },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '导航二',
-    //     iconCls: 'fa fa-id-card-o',
-    //     children: [
-    //         { path: '/page4', component: Page4, name: '页面4' },
-    //         { path: '/page5', component: Page5, name: '页面5' }
-    //     ]
-    // },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: '',
-    //     iconCls: 'fa fa-address-card',
-    //     leaf: true,//只有一个节点
-    //     children: [
-    //         { path: '/page6', component: Page6, name: '导航三' }
-    //     ]
-    // },
-    // {
-    //     path: '/',
-    //     component: Home,
-    //     name: 'Charts',
-    //     iconCls: 'fa fa-bar-chart',
-    //     children: [
-    //         { path: '/echarts', component: echarts, name: 'echarts' }
-    //     ]
-    // },
     {
         path: '*',
         hidden: true,
