@@ -80,7 +80,7 @@
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
                 <el-form-item label="类型">
-                    <el-input v-model="addForm.type"></el-input>
+                    <el-input v-model="addForm.type" placeholder="请输入数字0或1，0表示对所有用户，1表示对单一用户"></el-input>
                 </el-form-item>
                 <el-form-item label="对象ID">
                     <el-input v-model="addForm.user_id"></el-input>
