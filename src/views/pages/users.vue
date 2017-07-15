@@ -31,6 +31,8 @@
             </el-table-column>
             <el-table-column prop="available" label="可用" width="100" :formatter="formatAvailable" sortable>
             </el-table-column>
+            <el-table-column prop="disabled_reason" label="禁用原因" min-width="100" sortable>
+            </el-table-column>
             <el-table-column prop="praise_nums" label="喜欢数" width="100" sortable>
             </el-table-column>
 
@@ -120,6 +122,9 @@
                         <el-radio class="radio" :label="1">是</el-radio>
                         <el-radio class="radio" :label="0">否</el-radio>
                     </el-radio-group>
+                </el-form-item>
+                <el-form-item label="禁用原因">
+                    <el-input v-if="editForm.available == 0" v-model="editForm.disabled_reason"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
