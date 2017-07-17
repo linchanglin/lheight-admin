@@ -34,7 +34,7 @@ let base = '/admin-loves/apis';
 
 
 
-
+export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
 
 export const getNewLovesList = params => { return axios.get(`${base}/loves`, {params: params}); };
 export const addLove = params => { return axios.post(`${base}/loves`, {params: params}); };
