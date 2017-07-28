@@ -1,6 +1,6 @@
 <template>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-    <h3 class="title">表白墙管理系统</h3>
+    <h3 class="title">校园生活墙管理系统</h3>
     <el-form-item prop="account">
       <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
@@ -55,7 +55,7 @@ export default {
           var user = {
             id: 1,
             avatar: 'http://cdn.collhome.com/love.png',
-            name: '表白墙'
+            name: '校园生活墙'
           }
 
           if (this.ruleForm2.account == 'admin' && this.ruleForm2.checkPass == 'biaobaiqiang') {

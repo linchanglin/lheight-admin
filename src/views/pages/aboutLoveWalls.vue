@@ -125,7 +125,7 @@ export default {
             this.page = val;
             this.getAboutLoveWalls();
         },
-        //获取表白列表
+        //获取帖子列表
         getAboutLoveWalls() {
             let para = {
                 page: this.page,

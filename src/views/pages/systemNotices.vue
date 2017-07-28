@@ -154,7 +154,7 @@ export default {
             this.page = val;
             this.getSystemNotices();
         },
-        //获取表白列表
+        //获取帖子列表
         getSystemNotices() {
             let para = {
                 page: this.page,

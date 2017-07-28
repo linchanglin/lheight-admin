@@ -83,7 +83,7 @@ import siderBar from '../js/siderBar';
 export default {
 	data() {
 		return {
-			sysName: '表白墙管理系统',
+			sysName: '校园生活墙管理系统',
 			collapsed: false,
 			sysUserName: '',
 			sysUserAvatar: '',

@@ -133,7 +133,7 @@ export default {
             this.page = val;
             this.getCollegeUsers();
         },
-        //获取表白列表
+        //获取帖子列表
         getCollegeUsers() {
             let para = {
                 page: this.page,

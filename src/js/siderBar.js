@@ -13,7 +13,7 @@ let siderBar = [
         iconCls: 'fa fa-heart',
         leaf: true,//只有一个节点
         children: [
-            { path: '/loves', component: Loves, name: '表白管理' }
+            { path: '/loves', component: Loves, name: '帖子管理' }
         ]
     },
     {
@@ -50,10 +50,10 @@ let siderBar = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-university',
+        iconCls: 'fa fa-male',
         leaf: true,//只有一个节点
         children: [
-            { path: '/collegeUsers', component: Loves, name: '学校用户管理' }
+            { path: '/collegeUsers', component: Loves, name: '虚拟用户管理' }
         ]
     },
     {
@@ -73,7 +73,7 @@ let siderBar = [
         iconCls: 'fa fa-home',
         leaf: true,//只有一个节点
         children: [
-            { path: '/aboutLoveWalls', component: AboutLoveWall, name: '关于表白墙' }
+            { path: '/aboutLoveWalls', component: AboutLoveWall, name: '关于校园生活墙' }
         ]
     },
 ];

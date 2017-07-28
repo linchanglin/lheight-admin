@@ -39,7 +39,7 @@ let routes = [
         iconCls: 'fa fa-heart',
         leaf: true,//只有一个节点
         children: [
-            { path: '/loves', component: Loves, name: '表白管理' }
+            { path: '/loves', component: Loves, name: '帖子管理' }
         ]
     },
     {
@@ -96,10 +96,10 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-university',
+        iconCls: 'fa fa-male',
         leaf: true,//只有一个节点
         children: [
-            { path: '/collegeUsers', component: CollegeUsers, name: '学校用户管理' }
+            { path: '/collegeUsers', component: CollegeUsers, name: '虚拟用户管理' }
         ]
     },
     {
@@ -119,7 +119,7 @@ let routes = [
         iconCls: 'fa fa-home',
         leaf: true,//只有一个节点
         children: [
-            { path: '/aboutLoveWalls', component: AboutLoveWalls, name: '关于表白墙' }
+            { path: '/aboutLoveWalls', component: AboutLoveWalls, name: '关于校园生活墙' }
         ]
     },
     {

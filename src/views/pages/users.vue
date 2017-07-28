@@ -197,7 +197,7 @@ export default {
             this.page = val;
             this.getUsers();
         },
-        //获取表白列表
+        //获取帖子列表
         getUsers() {
             let para = {
                 page: this.page,

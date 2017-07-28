@@ -194,7 +194,7 @@ export default {
             this.page = val;
             this.getNewLoves();
         },
-        //获取表白列表
+        //获取帖子列表
         getNewLoves() {
             let para = {
                 type: 'newLoves',

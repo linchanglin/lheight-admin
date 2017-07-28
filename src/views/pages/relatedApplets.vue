@@ -151,7 +151,7 @@ export default {
             this.page = val;
             this.getRelatedApplets();
         },
-        //获取表白列表
+        //获取帖子列表
         getRelatedApplets() {
             let para = {
                 page: this.page,

@@ -163,7 +163,7 @@ export default {
             this.page = val;
             this.getComments();
         },
-        //获取表白
+        //获取帖子
         getLove() {
             let para = {
                 id: this.$route.params.id,
