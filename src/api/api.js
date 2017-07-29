@@ -81,6 +81,12 @@ export const editUser = params => { return axios.post(`${base}/users`, {params: 
 export const removeUser = params => { return axios.post(`${base}/delete/user`, {params: params}); };
 export const batchRemoveUser = params => { return axios.post(`${base}/delete/users`, {params: params}); };
 
+export const getVirtualUsersList = params => { return axios.get(`${base}/virtualUsers`, {params: params}); };
+export const addVirtualUser = params => { return axios.post(`${base}/virtualUsers`, {params: params}); };
+export const editVirtualUser = params => { return axios.post(`${base}/virtualUsers`, {params: params}); };
+export const removeVirtualUser = params => { return axios.post(`${base}/delete/virtualUser`, {params: params}); };
+export const batchRemoveVirtualUser = params => { return axios.post(`${base}/delete/virtualUsers`, {params: params}); };
+
 export const getCollegeUsersList = params => { return axios.get(`${base}/collegeUsers`, {params: params}); };
 export const addCollegeUser = params => { return axios.post(`${base}/collegeUsers`, {params: params}); };
 export const editCollegeUser = params => { return axios.post(`${base}/collegeUsers`, {params: params}); };

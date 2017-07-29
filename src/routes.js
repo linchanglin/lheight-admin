@@ -14,6 +14,7 @@ import Loves from './views/pages/loves.vue'
 import Comments from './views/pages/comments.vue'
 import Replies from './views/pages/replies.vue'
 import Users from './views/pages/users.vue'
+import VirtualUsers from './views/pages/virtualUsers.vue'
 import CollegeUsers from './views/pages/collegeUsers.vue'
 import SystemNotices from './views/pages/systemNotices.vue'
 import RelatedApplets from './views/pages/relatedApplets.vue'
@@ -90,6 +91,16 @@ let routes = [
         leaf: true,//只有一个节点
         children: [
             { path: '/users', component: Users, name: '用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-male',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/virtualUsers', component: VirtualUsers, name: '虚拟用户管理' }
         ]
     },
     {

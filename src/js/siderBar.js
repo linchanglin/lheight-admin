@@ -16,16 +16,7 @@ let siderBar = [
             { path: '/loves', component: Loves, name: '帖子管理' }
         ]
     },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-bell',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/systemNotices', component: Loves, name: '系统通知' }
-        ]
-    },
+
     // {
     //     path: '/',
     //     component: Home,
@@ -50,10 +41,30 @@ let siderBar = [
         path: '/',
         component: Home,
         name: '',
+        iconCls: 'fa fa-user',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/virtualUsers', component: Loves, name: '虚拟用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
         iconCls: 'fa fa-male',
         leaf: true,//只有一个节点
         children: [
-            { path: '/collegeUsers', component: Loves, name: '虚拟用户管理' }
+            { path: '/collegeUsers', component: Loves, name: '墙君管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-bell',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/systemNotices', component: Loves, name: '系统通知' }
         ]
     },
     {

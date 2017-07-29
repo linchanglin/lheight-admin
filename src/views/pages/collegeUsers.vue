@@ -9,9 +9,9 @@
                 <el-form-item>
                     <el-button type="primary" v-on:click="getCollegeUsers">查询</el-button>
                 </el-form-item>
-                <el-form-item>
+                <!-- <el-form-item>
                     <el-button type="primary" @click="handleAdd">新增</el-button>
-                </el-form-item>
+                </el-form-item> -->
             </el-form>
         </el-col>
     
@@ -67,7 +67,7 @@
         </el-dialog>
     
         <!--新增界面-->
-        <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
+         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
                 <el-form-item label="昵称">
                     <el-input v-model="addForm.nickname"></el-input>
@@ -86,7 +86,7 @@
                 <el-button @click.native="addFormVisible = false">取消</el-button>
                 <el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
             </div>
-        </el-dialog>
+        </el-dialog> 
     </section>
 </template>
 
