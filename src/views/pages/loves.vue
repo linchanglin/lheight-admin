@@ -149,6 +149,9 @@ import util from '../../common/js/util'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
 import { getNewLovesList, removeLove, batchRemoveLove, editLove, addLove } from '../../api/api';
 
+import Plupload  from 'http://cdn.staticfile.org/plupload/2.1.6/plupload.min.js';
+import Qiniu from '../../js-sdk/dist/qiniu.js';
+
 export default {
     data() {
         return {
