@@ -19,8 +19,8 @@
         <el-table :data="loves" border highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column type="index" width="60">
-            </el-table-column>
+            <!-- <el-table-column type="index" width="60">
+            </el-table-column> -->
             <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="images" label="图片" min-width="120" sortable>
@@ -91,15 +91,15 @@
                         <el-radio class="radio" :label="0">否</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <!--<el-form-item label="评论数">
+                <!-- <el-form-item label="评论数">
                     <el-input v-model="editForm.comment_nums" auto-complete="off"></el-input>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="喜欢数">
                     <el-input v-model="editForm.praise_nums" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="阅读数">
+                <!-- <el-form-item label="阅读数">
                     <el-input v-model="editForm.read_nums" auto-complete="off"></el-input>
-                </el-form-item>-->
+                </el-form-item> -->
                 <el-form-item label="可见性">
                     <el-radio-group v-model="editForm.available">
                         <el-radio class="radio" :label="1">是</el-radio>
@@ -111,6 +111,7 @@
                 <el-button @click.native="editFormVisible = false">取消</el-button>
                 <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
             </div>
+            
         </el-dialog>
     
         <!--新增界面-->
