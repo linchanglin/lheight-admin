@@ -162,6 +162,7 @@
 
 <script>
 import util from '../../common/js/util'
+import moment from '../../js-sdk/moment'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
 import { getUptoken, getNewLovesList, removeLove, batchRemoveLove, editLove, addLove } from '../../api/api';
