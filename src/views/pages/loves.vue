@@ -76,6 +76,22 @@
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
+                <el-upload
+                    action="https://upload-z2.qbox.me"
+                    list-type="picture-card"
+                    :on-success="handleSuccess"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove"
+                    :before-upload="beforeUpload"
+                    :data="upload_form"
+                    >
+                    
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog v-model="dialogVisible" size="tiny">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+
                 <el-form-item label="图片">
                     <el-input type="textarea" autosize v-model="editForm.images"></el-input>
                 </el-form-item>
@@ -148,14 +164,18 @@
 import util from '../../common/js/util'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-import { getNewLovesList, removeLove, batchRemoveLove, editLove, addLove } from '../../api/api';
+import { getUptoken, getNewLovesList, removeLove, batchRemoveLove, editLove, addLove } from '../../api/api';
 
-// import Plupload  from 'http://cdn.staticfile.org/plupload/2.1.6/plupload.min.js';
-// import Qiniu from '../../js-sdk/dist/qiniu.js';
 
 export default {
     data() {
         return {
+            dialogImageUrl: '',
+            dialogVisible: false,
+            upload_form: {},
+
+
+
             filters: {
                 search: ''
             },
@@ -187,6 +207,40 @@ export default {
         }
     },
     methods: {
+        handleRemove(file, fileList) {
+        console.log(file, fileList);
+        },
+        handlePictureCardPreview(file) {
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
+        beforeUpload (file) {
+            let curr = moment().format('YYYYMMDD').toString();
+            let prefix = moment(file.lastModified).format('HHmmss').toString();
+            let suffix = file.name;
+            let user_id = this.editForm.user_id;
+            let key = encodeURI(`${user_id}/${curr}.${prefix}_${suffix}`)
+            return getUptoken().then((res) => {
+                this.upload_form = {
+                    key: key,
+                    token: res.data.uptoken
+                }
+            })
+        },
+        handleSuccess (response, file, fileList) {
+            console.log("response", response);
+            console.log("file", file);
+            console.log("fileList", fileList);
+            // let key = response.key
+            // let name = file.name
+            // let prefix = this.supportWebp ? 'webp/' : ''
+            // let img = `![${name}](${this.bucketHost}/${prefix}${encodeURI(key)})`
+        },
+
+
+
+
+
         //是否显示转换
         formatAnonymous: function (row, column) {
             return row.anonymous == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
