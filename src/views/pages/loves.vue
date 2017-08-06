@@ -213,13 +213,21 @@ export default {
     methods: {
         handleRemove(file, fileList) {
             console.log(file, fileList);
-            let key = file.url;
-            let visit_url = 'http://lifecdn.collhome.com';
+            let key_url = file.url;
+            let key;
+            if (key_url.substr(0, 5) == 'http:') {
+                key = key_url;
+            } else {
+                let visit_url = 'http://lifecdn.collhome.com';
+                key = `${visit_url}/${key_url}`;
+            }
+            
             let para = {
                 love_id: this.editForm.id,
-                key: `${visit_url}/${key}`
+                key: key
             }
             removeImageFromLove(para).then((res) => {
+                this.getNewLoves();
                 console.log('removeImageFromLove');
             })
         },
@@ -248,6 +256,7 @@ export default {
                 key: `${visit_url}/${key}`
             }
             addImageToLove(para).then((res) => {
+                this.getNewLoves();
                 console.log('addImageToLove');
             })
         },
