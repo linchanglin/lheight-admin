@@ -214,9 +214,10 @@ export default {
         handleRemove(file, fileList) {
             console.log(file, fileList);
             let key = file.url;
+            let visit_url = 'http://lifecdn.collhome.com';
             let para = {
                 love_id: this.editForm.id,
-                key: key
+                key: `${visit_url}/${key}`
             }
             removeImageFromLove(para).then((res) => {
                 console.log('removeImageFromLove');
@@ -241,9 +242,10 @@ export default {
         },
         handleSuccess (response, file, fileList) {
             let key = response.key;
+            let visit_url = 'http://lifecdn.collhome.com';
             let para = {
                 love_id: this.editForm.id,
-                key: key
+                key: `${visit_url}/${key}`
             }
             addImageToLove(para).then((res) => {
                 console.log('addImageToLove');
