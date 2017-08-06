@@ -141,9 +141,9 @@
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="addForm.content"></el-input>
                 </el-form-item>
-                <el-form-item label="图片">
+                 <el-form-item label="图片">
                     <el-input type="textarea" autosize v-model="addForm.images"></el-input>
-                </el-form-item>
+                </el-form-item> 
                 <el-form-item label="视频地址">
                     <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
                 </el-form-item>
@@ -176,7 +176,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             upload_form: {},
-            fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
+            fileList2: [{name: 'food.jpeg', url: 'mbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
 
 
 
@@ -277,6 +277,9 @@ export default {
                 console.log('getNewLovesList res', res);
                 this.total = res.data.dataLength;
                 this.loves = res.data.data;
+
+                
+
                 this.listLoading = false;
             });
 
@@ -306,6 +309,21 @@ export default {
         handleEdit: function (row) {
             this.editFormVisible = true;
             this.editForm = Object.assign({}, row);
+
+            let loves = this.loves;
+            for (let love of loves) {
+                if (love.id == row.id) {
+                    let images = love.images_array;
+                    let fileList2 = [];
+                    for (let image of images) {
+                        let fileList = {
+                            url: image
+                        };
+                        fileList2.push(fileList);
+                    }
+                    this.fileList2 = fileList2;
+                }
+            }     
         },
         //显示新增界面
         handleAdd: function () {
