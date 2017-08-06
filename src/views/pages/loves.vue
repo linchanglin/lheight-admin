@@ -167,7 +167,7 @@ import util from '../../common/js/util'
 import moment from '../../js-sdk/moment'
 //import NProgress from 'nprogress'
 // import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-import { getUptoken, getNewLovesList, removeLove, batchRemoveLove, editLove, addLove } from '../../api/api';
+import { getUptoken, getNewLovesList, removeLove, batchRemoveLove, editLove, addLove, addImageToLove, removeImageFromLove } from '../../api/api';
 
 
 export default {
@@ -212,7 +212,15 @@ export default {
     },
     methods: {
         handleRemove(file, fileList) {
-        console.log(file, fileList);
+            console.log(file, fileList);
+            let key = file.url;
+            let para = {
+                love_id: this.editForm.id,
+                key: key
+            }
+            removeImageFromLove(para).then((res) => {
+                console.log('removeImageFromLove');
+            })
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
@@ -232,7 +240,14 @@ export default {
             })
         },
         handleSuccess (response, file, fileList) {
-            let key = response.key
+            let key = response.key;
+            let para = {
+                love_id: this.editForm.id,
+                key: key
+            }
+            addImageToLove(para).then((res) => {
+                console.log('addImageToLove');
+            })
         },
 
 

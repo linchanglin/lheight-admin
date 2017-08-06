@@ -38,6 +38,10 @@ export const requestLogin = params => { return axios.post(`${base}/login`, param
 
 export const getUptoken = () => { return axios.get(`${base}/uptoken`); };
 
+export const addImageToLove = params => { return axios.post(`${base}/addImage/love`, {params: params}); };
+export const removeImageFromLove = params => { return axios.post(`${base}/removeImage/love`, {params: params}); };
+
+
 export const getNewLovesList = params => { return axios.get(`${base}/loves`, {params: params}); };
 export const addLove = params => { return axios.post(`${base}/loves`, {params: params}); };
 export const editLove = params => { return axios.post(`${base}/loves`, {params: params}); };
