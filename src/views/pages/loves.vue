@@ -71,29 +71,31 @@
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
                 <el-form-item label="用户ID">
-                    <el-input v-model="editForm.user_id"></el-input>
+                    <el-input v-model="editForm.user_id" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="内容">
                     <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
-                <el-upload
-                    action="https://upload-z2.qbox.me"
-                    list-type="picture-card"
-                    :on-success="handleSuccess"
-                    :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove"
-                    :before-upload="beforeUpload"
-                    :data="upload_form"
-                    >
-                    
-                    <i class="el-icon-plus"></i>
-                </el-upload>
-                <el-dialog v-model="dialogVisible" size="tiny">
-                    <img width="100%" :src="dialogImageUrl" alt="">
-                </el-dialog>
+                
 
                 <el-form-item label="图片">
-                    <el-input type="textarea" autosize v-model="editForm.images"></el-input>
+                    <el-upload
+                        action="https://upload-z2.qbox.me"
+                        list-type="picture-card"
+                        :file-list="fileList2"
+                        :on-success="handleSuccess"
+                        :on-preview="handlePictureCardPreview"
+                        :on-remove="handleRemove"
+                        :before-upload="beforeUpload"
+                        :data="upload_form"
+                        >
+                        
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog v-model="dialogVisible" size="large">
+                        <img width="100%" :src="dialogImageUrl" alt="">
+                    </el-dialog>
+                    <!-- <el-input type="textarea" autosize v-model="editForm.images"></el-input> -->
                 </el-form-item>
                 <el-form-item label="视频地址">
                     <el-input type="textarea" autosize v-model="editForm.video_url"></el-input>
@@ -174,6 +176,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             upload_form: {},
+            fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
 
 
 
@@ -229,13 +232,7 @@ export default {
             })
         },
         handleSuccess (response, file, fileList) {
-            console.log("response", response);
-            console.log("file", file);
-            console.log("fileList", fileList);
-            // let key = response.key
-            // let name = file.name
-            // let prefix = this.supportWebp ? 'webp/' : ''
-            // let img = `![${name}](${this.bucketHost}/${prefix}${encodeURI(key)})`
+            let key = response.key
         },
 
 
