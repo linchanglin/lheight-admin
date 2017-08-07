@@ -220,7 +220,7 @@ export default {
                     { type: 'number', message: '用户id必须为数字值', trigger: 'blur'}
                 ],
                 postingType_id: [
-                    { required: true, message: '主题不能为空', trigger: 'blur' }
+                    { required: true, message: '主题不能为空', trigger: 'change' }
                 ],
                 content: [
                     { required: true, message: '内容不能为空', trigger: 'blur' }
