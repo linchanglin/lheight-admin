@@ -21,6 +21,8 @@
             </el-table-column>
             <!-- <el-table-column type="index" width="60">
             </el-table-column> -->
+            <el-table-column prop="postingType_name" label="主题" width="100" sortable>
+            </el-table-column>
             <el-table-column prop="content" label="内容" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="images" label="图片" min-width="120" sortable>
@@ -63,7 +65,7 @@
         <!--工具条-->
         <el-col :span="24" class="toolbar">
             <el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-sizes="[10, 20, 50, 100]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total" style="float:right;">
             </el-pagination>
         </el-col>
     
@@ -135,16 +137,26 @@
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-                <el-form-item label="用户ID">
+                <el-form-item label="用户ID" prop="user_id">
                     <el-input v-model="addForm.user_id"></el-input>
                 </el-form-item>
-                <el-form-item label="内容">
+                <el-form-item label="主题" prop="postingType_id">
+                    <el-select v-model="addForm.postingType_id" placeholder="">
+                    <el-option label="表白" value="1"></el-option>
+                    <el-option label="活动" value="2"></el-option>
+                    <el-option label="求助" value="3"></el-option>
+                    <el-option label="物品" value="4"></el-option>
+                    <el-option label="吐槽" value="5"></el-option>
+                    <el-option label="工作" value="6"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="内容" prop="content">
                     <el-input type="textarea" autosize v-model="addForm.content"></el-input>
                 </el-form-item>
-                 <el-form-item label="图片">
+                 <el-form-item label="图片" prop="images">
                     <el-input type="textarea" autosize v-model="addForm.images"></el-input>
                 </el-form-item> 
-                <el-form-item label="视频地址">
+                <el-form-item label="视频地址" prop="video_url">
                     <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
                 </el-form-item>
                 <el-form-item label="匿名">
@@ -202,9 +214,16 @@ export default {
             addFormVisible: false,//新增界面是否显示
             addLoading: false,
             addFormRules: {
+                user_id: [
+                    { required: true, message: '发帖用户id不能为空', trigger: 'blur'},
+                    { type: 'number', message: '用户id必须为数字值', trigger: 'blur'}
+                ],
+                postingType_id: [
+                    { required: true, message: '主题不能为空', trigger: 'blur' }
+                ],
                 content: [
-                    { required: true, message: '请输入内容', trigger: 'blur' }
-                ]
+                    { required: true, message: '内容不能为空', trigger: 'blur' }
+                ],
             },
             //新增界面数据
             addForm: {}
@@ -341,6 +360,7 @@ export default {
             this.addFormVisible = true;
             this.addForm = {
                 user_id: '',
+                postingType_id: '',
                 content: '',
                 images: '',
                 video_url: '',
