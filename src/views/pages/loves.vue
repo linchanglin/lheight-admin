@@ -72,10 +72,28 @@
         <!--编辑界面-->
         <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
             <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-                <el-form-item label="用户ID">
-                    <el-input v-model="editForm.user_id" :disabled="true"></el-input>
+                
+                <el-form-item
+                    label="用户ID"
+                    prop="user_id"
+                    :rules="[
+                    { required: true, message: '用户id不能为空'},
+                    { type: 'number', message: '用户id必须为数字值'}
+                    ]"
+                >
+                    <el-input v-model.number="editForm.user_id" :disabled="true" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="内容">
+                <el-form-item label="主题" prop="postingType_id">
+                    <el-select v-model="editForm.postingType_id" placeholder="">
+                        <el-option label="表白" value="1"></el-option>
+                        <el-option label="活动" value="2"></el-option>
+                        <el-option label="求助" value="3"></el-option>
+                        <el-option label="物品" value="4"></el-option>
+                        <el-option label="吐槽" value="5"></el-option>
+                        <el-option label="工作" value="6"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="内容" prop="content">
                     <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
                 
@@ -94,12 +112,12 @@
                         
                         <i class="el-icon-plus"></i>
                     </el-upload>
-                    <el-dialog v-model="dialogVisible" size="large">
+                    <el-dialog v-model="dialogVisible" size="small">
                         <img width="100%" :src="dialogImageUrl" alt="">
                     </el-dialog>
                     <!-- <el-input type="textarea" autosize v-model="editForm.images"></el-input> -->
                 </el-form-item>
-                <el-form-item label="视频地址">
+                <el-form-item label="视频地址" prop="video_url">
                     <el-input type="textarea" autosize v-model="editForm.video_url"></el-input>
                 </el-form-item>
                 <!--<el-form-item label="位置">
@@ -137,18 +155,15 @@
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" ref="addForm" label-width="80px" :rules="addFormRules">
-                <el-form-item label="用户ID" prop="user_id">
-                    <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
-                </el-form-item>
                 <el-form-item
-                    label="年龄"
+                    label="用户ID"
                     prop="user_id"
                     :rules="[
-                    { required: true, message: '年龄不能为空'},
-                    { type: 'number', message: '年龄必须为数字值'}
+                    { required: true, message: '用户id不能为空'},
+                    { type: 'number', message: '用户id必须为数字值'}
                     ]"
                 >
-                <el-input type="user_id" v-model.number="addForm.user_id" auto-complete="off"></el-input>
+                    <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
                     <el-select v-model="addForm.postingType_id" placeholder="">
@@ -215,9 +230,12 @@ export default {
             editFormVisible: false,//编辑界面是否显示
             editLoading: false,
             editFormRules: {
+                postingType_id: [
+                    { required: true, message: '主题不能为空', trigger: 'change' }
+                ],
                 content: [
-                    { required: true, message: '请输入内容', trigger: 'blur' }
-                ]
+                    { required: true, message: '内容不能为空', trigger: 'blur' }
+                ],
             },
             //编辑界面数据
             editForm: {},
@@ -225,10 +243,6 @@ export default {
             addFormVisible: false,//新增界面是否显示
             addLoading: false,
             addFormRules: {
-                user_id: [
-                    { required: true, message: '发帖用户id不能为空', trigger: 'blur'},
-                    { type: 'number', message: '用户id必须为数字值', trigger: 'blur'}
-                ],
                 postingType_id: [
                     { required: true, message: '主题不能为空', trigger: 'change' }
                 ],
