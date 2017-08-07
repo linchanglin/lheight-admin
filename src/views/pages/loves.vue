@@ -19,8 +19,8 @@
         <el-table :data="loves" border highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <!-- <el-table-column type="index" width="60">
-            </el-table-column> -->
+             <el-table-column type="index" width="60">
+            </el-table-column> 
             <el-table-column prop="postingType_name" label="主题" width="100" sortable>
             </el-table-column>
             <el-table-column prop="content" label="内容" min-width="120" sortable>
@@ -65,7 +65,7 @@
         <!--工具条-->
         <el-col :span="24" class="toolbar">
             <el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-sizes="[10, 20, 50, 100]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="total" style="float:right;">
+            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total" style="float:right;">
             </el-pagination>
         </el-col>
     
@@ -138,7 +138,17 @@
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" ref="addForm" label-width="80px" :rules="addFormRules">
                 <el-form-item label="用户ID" prop="user_id">
-                    <el-input type="user_id" v-model.number="addForm.user_id"></el-input>
+                    <el-input v-model.number="addForm.user_id"></el-input>
+                </el-form-item>
+                <el-form-item
+                    label="年龄"
+                    prop="user_id"
+                    :rules="[
+                    { required: true, message: '年龄不能为空'},
+                    { type: 'number', message: '年龄必须为数字值'}
+                    ]"
+                >
+                <el-input type="user_id" v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
                     <el-select v-model="addForm.postingType_id" placeholder="">
