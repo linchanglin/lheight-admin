@@ -136,18 +136,18 @@
     
         <!--新增界面-->
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
-            <el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
+            <el-form :model="addForm" ref="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
                 <el-form-item label="用户ID" prop="user_id">
-                    <el-input v-model="addForm.user_id"></el-input>
+                    <el-input v-model.number="addForm.user_id"></el-input>
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
                     <el-select v-model="addForm.postingType_id" placeholder="">
-                    <el-option label="表白" value="1"></el-option>
-                    <el-option label="活动" value="2"></el-option>
-                    <el-option label="求助" value="3"></el-option>
-                    <el-option label="物品" value="4"></el-option>
-                    <el-option label="吐槽" value="5"></el-option>
-                    <el-option label="工作" value="6"></el-option>
+                        <el-option label="表白" value="1"></el-option>
+                        <el-option label="活动" value="2"></el-option>
+                        <el-option label="求助" value="3"></el-option>
+                        <el-option label="物品" value="4"></el-option>
+                        <el-option label="吐槽" value="5"></el-option>
+                        <el-option label="工作" value="6"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="内容" prop="content">
@@ -167,8 +167,9 @@
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click.native="addFormVisible = false">取消</el-button>
+                <!-- <el-button @click.native="addFormVisible = false">取消</el-button> -->
                 <el-button type="primary" @click.native="addSubmit" :loading="addLoading">提交</el-button>
+                <el-button @click="resetForm('addForm')">重置</el-button>
             </div>
         </el-dialog>
     </section>
@@ -413,6 +414,9 @@ export default {
                     });
                 }
             });
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
         },
         selsChange: function (sels) {
             this.sels = sels;
