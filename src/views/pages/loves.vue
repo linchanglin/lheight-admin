@@ -138,7 +138,7 @@
         <el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
             <el-form :model="addForm" ref="addForm" label-width="80px" :rules="addFormRules">
                 <el-form-item label="用户ID" prop="user_id">
-                    <el-input v-model.number="addForm.user_id"></el-input>
+                    <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item
                     label="年龄"
