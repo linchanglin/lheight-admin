@@ -85,12 +85,12 @@
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
                     <el-select v-model="editForm.postingType_id" placeholder="">
-                        <el-option label="表白" value="1"></el-option>
-                        <el-option label="活动" value="2"></el-option>
-                        <el-option label="求助" value="3"></el-option>
-                        <el-option label="物品" value="4"></el-option>
-                        <el-option label="吐槽" value="5"></el-option>
-                        <el-option label="工作" value="6"></el-option>
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="内容" prop="content">
@@ -152,7 +152,7 @@
             
         </el-dialog>
 
-        <el-dialog v-model="dialogVisible" size="small">
+        <el-dialog v-model="dialogVisible" size="tiny">
             <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
     
@@ -170,13 +170,19 @@
                     <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
-                    <el-select v-model="addForm.postingType_id" placeholder="">
-                        <el-option label="表白" value="1"></el-option>
+                    <el-select v-model="addForm.postingType_name" placeholder="">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                        <!-- <el-option label="表白" value="1"></el-option>
                         <el-option label="活动" value="2"></el-option>
                         <el-option label="求助" value="3"></el-option>
                         <el-option label="物品" value="4"></el-option>
                         <el-option label="吐槽" value="5"></el-option>
-                        <el-option label="工作" value="6"></el-option>
+                        <el-option label="工作" value="6"></el-option> -->
                     </el-select>
                 </el-form-item>
                 <el-form-item label="内容" prop="content">
@@ -218,7 +224,28 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             upload_form: {},
-            fileList2: [{name: 'food.jpeg', url: 'mbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
+
+            options: [{
+                value: '1',
+                label: '表白'
+            }, {
+                value: '2',
+                label: '活动'
+            }, {
+                value: '3',
+                label: '求助'
+            }, {
+                value: '4',
+                label: '物品'
+            }, {
+                value: '5',
+                label: '吐槽'
+            }, {
+                value: '5',
+                label: '工作'
+            }],
+            // value: '',
+            // fileList2: [],
 
 
 
