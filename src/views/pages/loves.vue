@@ -170,19 +170,13 @@
                     <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
-                    <el-select v-model="addForm.postingType_name" placeholder="">
+                    <el-select v-model="addForm.postingType_id" placeholder="">
                         <el-option
                             v-for="item in options"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value">
                         </el-option>
-                        <!-- <el-option label="表白" value="1"></el-option>
-                        <el-option label="活动" value="2"></el-option>
-                        <el-option label="求助" value="3"></el-option>
-                        <el-option label="物品" value="4"></el-option>
-                        <el-option label="吐槽" value="5"></el-option>
-                        <el-option label="工作" value="6"></el-option> -->
                     </el-select>
                 </el-form-item>
                 <el-form-item label="内容" prop="content">
@@ -226,22 +220,22 @@ export default {
             upload_form: {},
 
             options: [{
-                value: '1',
+                value: 1,
                 label: '表白'
             }, {
-                value: '2',
+                value: 2,
                 label: '活动'
             }, {
-                value: '3',
+                value: 3,
                 label: '求助'
             }, {
-                value: '4',
+                value: 4,
                 label: '物品'
             }, {
-                value: '5',
+                value: 5,
                 label: '吐槽'
             }, {
-                value: '5',
+                value: 6,
                 label: '工作'
             }],
             // value: '',
