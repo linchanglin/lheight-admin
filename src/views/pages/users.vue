@@ -70,23 +70,23 @@
             </el-table-column>
             <el-table-column prop="constellation" label="星座" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="height" label="身高" width="100" sortable>
+             <!-- <el-table-column prop="height" label="身高" width="100" sortable>
             </el-table-column>
-            <el-table-column prop="weight" label="体重" width="100" sortable>
-            </el-table-column>
+            <el-table-column prop="weight" label="体重" width="100" sortable> 
+            </el-table-column> -->
             <el-table-column prop="hometown" label="故乡" width="100" sortable>
             </el-table-column>
 
             <el-table-column prop="signature" label="签名" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="character" label="性格" min-width="120" sortable>
+            <!-- <el-table-column prop="character" label="性格" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="hobby" label="爱好" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="love_history" label="恋爱史" min-width="120" sortable>
             </el-table-column>
             <el-table-column prop="love_selecting" label="择偶观" min-width="120" sortable>
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column fixed="right" label="操作" width="100">
                 <template scope="scope">
@@ -99,7 +99,7 @@
         <!--工具条-->
         <el-col :span="24" class="toolbar">
             <!--<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>-->
-            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
             </el-pagination>
         </el-col>
     

@@ -65,7 +65,9 @@
         <!--工具条-->
         <el-col :span="24" class="toolbar">
             <el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total" style="float:right;">
+            <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
+
+            <!-- <el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :total="total" style="float:right;"> -->
             </el-pagination>
         </el-col>
     
@@ -123,12 +125,6 @@
                 <!--<el-form-item label="位置">
                     <el-input v-model="editForm.location" auto-complete="off"></el-input>
                 </el-form-item>-->
-                <el-form-item label="匿名">
-                    <el-radio-group v-model="editForm.anonymous">
-                        <el-radio class="radio" :label="1">是</el-radio>
-                        <el-radio class="radio" :label="0">否</el-radio>
-                    </el-radio-group>
-                </el-form-item>
                 <!-- <el-form-item label="评论数">
                     <el-input v-model="editForm.comment_nums" auto-complete="off"></el-input>
                 </el-form-item> -->
@@ -138,6 +134,12 @@
                 <!-- <el-form-item label="阅读数">
                     <el-input v-model="editForm.read_nums" auto-complete="off"></el-input>
                 </el-form-item> -->
+                <el-form-item label="匿名">
+                    <el-radio-group v-model="editForm.anonymous">
+                        <el-radio class="radio" :label="1">是</el-radio>
+                        <el-radio class="radio" :label="0">否</el-radio>
+                    </el-radio-group>
+                </el-form-item>
                 <el-form-item label="可见性">
                     <el-radio-group v-model="editForm.available">
                         <el-radio class="radio" :label="1">是</el-radio>
