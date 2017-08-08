@@ -112,9 +112,9 @@
                         
                         <i class="el-icon-plus"></i>
                     </el-upload>
-                    <el-dialog v-model="dialogVisible" size="small">
+                    <!-- <el-dialog v-model="dialogVisible" size="small">
                         <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
+                    </el-dialog> -->
                     <!-- <el-input type="textarea" autosize v-model="editForm.images"></el-input> -->
                 </el-form-item>
                 <el-form-item label="视频地址" prop="video_url">
@@ -150,6 +150,10 @@
                 <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
             </div>
             
+        </el-dialog>
+
+        <el-dialog v-model="dialogVisible" size="small">
+            <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
     
         <!--新增界面-->
