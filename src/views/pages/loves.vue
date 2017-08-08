@@ -170,7 +170,7 @@
                     <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="主题" prop="postingType_id">
-                    <el-select v-model="addForm.postingType_name" placeholder="">
+                    <el-select v-model="addForm.postingType_id" placeholder="">
                         <el-option
                             v-for="item in options"
                             :key="item.value"
