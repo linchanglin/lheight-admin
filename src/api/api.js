@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-let base = '/admin-life/apis';
-
-// let base = '';
-
-
+let base;
+if (location.href.indexOf("life.collhome.com") > -1) {
+    base = '/life/apis';
+} else {
+    base = 'https://collhome.com/life/apis'
+}
 
 
 // export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
@@ -48,6 +49,12 @@ export const editLove = params => { return axios.post(`${base}/loves`, {params: 
 export const removeLove = params => { return axios.post(`${base}/delete/love`, {params: params}); };
 export const batchRemoveLove = params => { return axios.post(`${base}/delete/loves`, {params: params}); };
 
+export const getRadiosList = params => { return axios.get(`${base}/get_radio/list`, {params: params}); };
+export const addRadio = params => { return axios.post(`${base}/radios`, {params: params}); };
+export const editRadio = params => { return axios.post(`${base}/radios`, {params: params}); };
+export const removeRadio = params => { return axios.post(`${base}/delete/radio`, {params: params}); };
+export const batchRemoveRadio = params => { return axios.post(`${base}/delete/radios`, {params: params}); };
+
 
 export const getLove = params => { return axios.get(`${base}/loves/${params.id}`); };
 export const getCommentsList = params => { return axios.get(`${base}/loves/${params.id}/comments`); };
@@ -63,7 +70,7 @@ export const editReply = params => { return axios.post(`${base}/replies`, {param
 export const removeReply = params => { return axios.post(`${base}/delete/reply`, {params: params}); };
 export const batchRemoveReply = params => { return axios.post(`${base}/delete/replies`, {params: params}); };
 
-export const getSystemNoticesList = params => { return axios.get(`${base}/systemNotices`, {params: params}); };
+export const getSystemNoticesList = params => { return axios.get(`${base}/systemNotices_backsystem`, {params: params}); };
 export const addSystemNotice = params => { return axios.post(`${base}/systemNotices`, {params: params}); };
 export const editSystemNotice = params => { return axios.post(`${base}/systemNotices`, {params: params}); };
 export const removeSystemNotice = params => { return axios.post(`${base}/delete/systemNotice`, {params: params}); };

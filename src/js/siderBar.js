@@ -1,6 +1,7 @@
 import Home from '../views/Home.vue'
 
 import Loves from '../views/pages/loves.vue'
+import Radios from '../views/pages/radios.vue'
 import Comments from '../views/pages/comments.vue'
 import Replies from '../views/pages/replies.vue'
 import AboutLoveWall from '../views/pages/comments.vue'
@@ -14,6 +15,16 @@ let siderBar = [
         leaf: true,//只有一个节点
         children: [
             { path: '/loves', component: Loves, name: '帖子管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-volume-down',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/radios', component: Radios, name: '电台管理' }
         ]
     },
 

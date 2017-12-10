@@ -11,6 +11,7 @@ import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
 import Loves from './views/pages/loves.vue'
+import Radios from './views/pages/radios.vue'
 import Comments from './views/pages/comments.vue'
 import Replies from './views/pages/replies.vue'
 import Users from './views/pages/users.vue'
@@ -41,6 +42,16 @@ let routes = [
         leaf: true,//只有一个节点
         children: [
             { path: '/loves', component: Loves, name: '帖子管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-volume-down',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/radios', component: Radios, name: '电台管理' }
         ]
     },
     {

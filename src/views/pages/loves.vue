@@ -241,7 +241,7 @@ export default {
                 label: '工作'
             }],
             // value: '',
-            // fileList2: [],
+            fileList2: [],
 
 
 
