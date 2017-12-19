@@ -89,8 +89,8 @@ export const removeAboutLoveWall = params => { return axios.post(`${base}/delete
 export const batchRemoveAboutLoveWall = params => { return axios.post(`${base}/delete/aboutLoveWalls`, {params: params}); };
 
 export const getUsersList = params => { return axios.get(`${base}/users`, {params: params}); };
-export const addUser = params => { return axios.post(`${base}/users`, {params: params}); };
-export const editUser = params => { return axios.post(`${base}/users`, {params: params}); };
+export const addUser = params => { return axios.post(`${base}/back/users`, {params: params}); };
+export const editUser = params => { return axios.post(`${base}/back/users`, {params: params}); };
 export const removeUser = params => { return axios.post(`${base}/delete/user`, {params: params}); };
 export const batchRemoveUser = params => { return axios.post(`${base}/delete/users`, {params: params}); };
 
