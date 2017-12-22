@@ -39,8 +39,8 @@
             </el-table-column>
             <el-table-column prop="article_author" label="文章作者" min-width="120" sortable>
             </el-table-column>
-            <el-table-column prop="article_content" label="文章内容" min-width="120" sortable>
-            </el-table-column>
+            <!-- <el-table-column prop="article_content" label="文章内容" min-width="120" sortable>
+            </el-table-column> -->
             <el-table-column prop="article_remark" label="文章备注" min-width="120" sortable>
             </el-table-column>
 
