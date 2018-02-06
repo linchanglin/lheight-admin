@@ -104,6 +104,16 @@ let routes = [
             { path: '/users', component: Users, name: '用户管理' }
         ]
     },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '',
+    //     iconCls: 'fa fa-male',
+    //     leaf: true,//只有一个节点
+    //     children: [
+    //         { path: '/virtualUsers', component: VirtualUsers, name: '虚拟用户管理' }
+    //     ]
+    // },
     {
         path: '/',
         component: Home,
@@ -111,17 +121,7 @@ let routes = [
         iconCls: 'fa fa-male',
         leaf: true,//只有一个节点
         children: [
-            { path: '/virtualUsers', component: VirtualUsers, name: '虚拟用户管理' }
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-male',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/collegeUsers', component: CollegeUsers, name: '虚拟用户管理' }
+            { path: '/collegeUsers', component: Loves, name: '墙君管理' }
         ]
     },
     {

@@ -35,7 +35,7 @@ if (location.href.indexOf("life.collhome.com") > -1) {
 
 
 
-export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
+export const requestLogin = params => { return axios.post(`${base}/admin/login`, params).then(res => res.data); };
 
 export const getUptoken = () => { return axios.get(`${base}/uptoken`); };
 
@@ -94,11 +94,11 @@ export const editUser = params => { return axios.post(`${base}/back/users`, {par
 export const removeUser = params => { return axios.post(`${base}/delete/user`, {params: params}); };
 export const batchRemoveUser = params => { return axios.post(`${base}/delete/users`, {params: params}); };
 
-export const getVirtualUsersList = params => { return axios.get(`${base}/virtualUsers`, {params: params}); };
-export const addVirtualUser = params => { return axios.post(`${base}/virtualUsers`, {params: params}); };
-export const editVirtualUser = params => { return axios.post(`${base}/virtualUsers`, {params: params}); };
-export const removeVirtualUser = params => { return axios.post(`${base}/delete/virtualUser`, {params: params}); };
-export const batchRemoveVirtualUser = params => { return axios.post(`${base}/delete/virtualUsers`, {params: params}); };
+// export const getVirtualUsersList = params => { return axios.get(`${base}/virtualUsers`, {params: params}); };
+// export const addVirtualUser = params => { return axios.post(`${base}/virtualUsers`, {params: params}); };
+// export const editVirtualUser = params => { return axios.post(`${base}/virtualUsers`, {params: params}); };
+// export const removeVirtualUser = params => { return axios.post(`${base}/delete/virtualUser`, {params: params}); };
+// export const batchRemoveVirtualUser = params => { return axios.post(`${base}/delete/virtualUsers`, {params: params}); };
 
 export const getCollegeUsersList = params => { return axios.get(`${base}/collegeUsers`, {params: params}); };
 export const addCollegeUser = params => { return axios.post(`${base}/collegeUsers`, {params: params}); };

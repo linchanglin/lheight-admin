@@ -140,8 +140,13 @@ export default {
 		var user = sessionStorage.getItem('user');
 		if (user) {
 			user = JSON.parse(user);
-			this.sysUserName = user.name || '';
-			this.sysUserAvatar = user.avatar || '';
+			if (user.realname) {
+				this.sysUserName = user.realname;
+			} else {
+				this.sysUserName = user.nickname || '';
+			}
+			// this.sysUserName = user.realname || user.nickname || '';
+			this.sysUserAvatar = user.avatarUrl || '';
 		}
 
 	}

@@ -48,16 +48,16 @@ let siderBar = [
             { path: '/users', component: Loves, name: '用户管理' }
         ]
     },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-user',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/virtualUsers', component: Loves, name: '虚拟用户管理' }
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '',
+    //     iconCls: 'fa fa-user',
+    //     leaf: true,//只有一个节点
+    //     children: [
+    //         { path: '/virtualUsers', component: Loves, name: '虚拟用户管理' }
+    //     ]
+    // },
     {
         path: '/',
         component: Home,
