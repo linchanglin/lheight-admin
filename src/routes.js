@@ -114,26 +114,26 @@ let routes = [
     //         { path: '/virtualUsers', component: VirtualUsers, name: '虚拟用户管理' }
     //     ]
     // },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-male',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/collegeUsers', component: Loves, name: '墙君管理' }
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-user',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/relatedApplets', component: RelatedApplets, name: '相关小程序' }
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '',
+    //     iconCls: 'fa fa-male',
+    //     leaf: true,//只有一个节点
+    //     children: [
+    //         { path: '/collegeUsers', component: Loves, name: '墙君管理' }
+    //     ]
+    // },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '',
+    //     iconCls: 'fa fa-user',
+    //     leaf: true,//只有一个节点
+    //     children: [
+    //         { path: '/relatedApplets', component: RelatedApplets, name: '相关小程序' }
+    //     ]
+    // },
     {
         path: '/',
         component: Home,

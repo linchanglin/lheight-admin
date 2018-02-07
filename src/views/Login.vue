@@ -23,7 +23,7 @@ export default {
     return {
       logining: false,
       ruleForm2: {
-        account: 'admin',
+        account: '',
         checkPass: ''
       },
       rules2: {
@@ -43,81 +43,81 @@ export default {
     handleReset2() {
       this.$refs.ruleForm2.resetFields();
     },
-    // handleSubmit2(ev) {
-    //   var _this = this;
-    //   this.$refs.ruleForm2.validate((valid) => {
-    //     if (valid) {
-    //       //_this.$router.replace('/table');
-    //       // this.logining = true;
-    //       //NProgress.start();
-    //       // var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-    //       // this.logining = false;
-    //       var user = {
-    //         id: 1,
-    //         avatar: 'http://cdn.collhome.com/love.png',
-    //         name: '校园生活墙'
-    //       }
-
-    //       if (this.ruleForm2.account == 'admin' && this.ruleForm2.checkPass == 'biaobaiqiang') {
-    //         sessionStorage.setItem('user', JSON.stringify(user));
-    //         // this.$router.push({ path: '/table' });
-    //         this.$router.push({ path: '/loves' });
-    //       } else {
-    //         this.$message({
-    //           message: '用户名或密码错误！',
-    //           type: 'error'
-    //         });
-    //       }
-    //     } else {
-    //       console.log('error submit!!');
-    //       return false;
-    //     }
-    //   });
-    // },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     handleSubmit2(ev) {
       var _this = this;
       this.$refs.ruleForm2.validate((valid) => {
         if (valid) {
           //_this.$router.replace('/table');
-          this.logining = true;
+          // this.logining = true;
           //NProgress.start();
-          var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-          requestLogin(loginParams).then(data => {
-            this.logining = false;
-            //NProgress.done();
-            console.log('requestLogin data', data);
-            let { msg, code, user } = data;
-            if (code !== 200) {
-              this.$message({
-                message: msg,
-                type: 'error'
-              });
-            } else {
-              sessionStorage.setItem('user', JSON.stringify(user));
-              // this.$router.push({ path: '/table' });
-              this.$router.push({ path: '/loves' });
-            }
-          });
+          // var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+          // this.logining = false;
+          var user = {
+            id: 1,
+            avatarUrl: 'http://cdn.collhome.com/love.png',
+            realname: '校园生活墙'
+          }
+
+          if (this.ruleForm2.account == 'admin' && this.ruleForm2.checkPass == 'biaobaiqiang') {
+            sessionStorage.setItem('user', JSON.stringify(user));
+            // this.$router.push({ path: '/table' });
+            this.$router.push({ path: '/loves' });
+          } else {
+            this.$message({
+              message: '用户名或密码错误！',
+              type: 'error'
+            });
+          }
         } else {
           console.log('error submit!!');
           return false;
         }
       });
-    }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // handleSubmit2(ev) {
+    //   var _this = this;
+    //   this.$refs.ruleForm2.validate((valid) => {
+    //     if (valid) {
+    //       //_this.$router.replace('/table');
+    //       this.logining = true;
+    //       //NProgress.start();
+    //       var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+    //       requestLogin(loginParams).then(data => {
+    //         this.logining = false;
+    //         //NProgress.done();
+    //         console.log('requestLogin data', data);
+    //         let { msg, code, user } = data;
+    //         if (code !== 200) {
+    //           this.$message({
+    //             message: msg,
+    //             type: 'error'
+    //           });
+    //         } else {
+    //           sessionStorage.setItem('user', JSON.stringify(user));
+    //           // this.$router.push({ path: '/table' });
+    //           this.$router.push({ path: '/loves' });
+    //         }
+    //       });
+    //     } else {
+    //       console.log('error submit!!');
+    //       return false;
+    //     }
+    //   });
+    // }
     
 
 

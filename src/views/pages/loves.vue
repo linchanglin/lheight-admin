@@ -23,7 +23,7 @@
             </el-table-column> 
             <!-- <el-table-column prop="postingType_name" label="主题" width="100" sortable>
             </el-table-column> -->
-            <el-table-column prop="content" label="内容" min-width="120" sortable>
+            <el-table-column prop="content" label="内容" min-width="120" :formatter="formatContent" sortable>
             </el-table-column>
             <!-- <el-table-column prop="images" label="图片" min-width="120" sortable>
             </el-table-column>
@@ -85,7 +85,7 @@
                 >
                     <el-input v-model.number="editForm.user_id" :disabled="true" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="主题" prop="postingType_id">
+                <!-- <el-form-item label="主题" prop="postingType_id">
                     <el-select v-model="editForm.postingType_id" placeholder="">
                         <el-option
                             v-for="item in options"
@@ -94,7 +94,7 @@
                             :value="item.value">
                         </el-option>
                     </el-select>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="内容" prop="content">
                     <el-input type="textarea" autosize v-model="editForm.content"></el-input>
                 </el-form-item>
@@ -171,7 +171,7 @@
                 >
                     <el-input v-model.number="addForm.user_id" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="主题" prop="postingType_id">
+                <!-- <el-form-item label="主题" prop="postingType_id">
                     <el-select v-model="addForm.postingType_id" placeholder="">
                         <el-option
                             v-for="item in options"
@@ -180,13 +180,13 @@
                             :value="item.value">
                         </el-option>
                     </el-select>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="内容" prop="content">
                     <el-input type="textarea" autosize v-model="addForm.content"></el-input>
                 </el-form-item>
-                 <el-form-item label="图片" prop="images">
+                 <!-- <el-form-item label="图片" prop="images">
                     <el-input type="textarea" autosize v-model="addForm.images"></el-input>
-                </el-form-item> 
+                </el-form-item>  -->
                 <el-form-item label="视频地址" prop="video_url">
                     <el-input type="textarea" autosize v-model="addForm.video_url"></el-input>
                 </el-form-item>
@@ -221,29 +221,30 @@ export default {
             dialogVisible: false,
             upload_form: {},
 
-            options: [{
-                value: '1',
-                label: '表白'
-            }, {
-                value: '2',
-                label: '活动'
-            }, {
-                value: '3',
-                label: '求助'
-            }, {
-                value: '4',
-                label: '物品'
-            }, {
-                value: '5',
-                label: '吐槽'
-            }, {
-                value: '6',
-                label: '工作'
-            }],
+            // options: [{
+            //     value: '1',
+            //     label: '表白'
+            // }, {
+            //     value: '2',
+            //     label: '活动'
+            // }, {
+            //     value: '3',
+            //     label: '求助'
+            // }, {
+            //     value: '4',
+            //     label: '物品'
+            // }, {
+            //     value: '5',
+            //     label: '吐槽'
+            // }, {
+            //     value: '6',
+            //     label: '工作'
+            // }],
             // value: '',
             fileList2: [],
 
 
+            login_user: {},
 
             filters: {
                 search: ''
@@ -257,9 +258,9 @@ export default {
             editFormVisible: false,//编辑界面是否显示
             editLoading: false,
             editFormRules: {
-                postingType_id: [
-                    { required: true, message: '主题不能为空', trigger: 'change' }
-                ],
+                // postingType_id: [
+                //     { required: true, message: '主题不能为空', trigger: 'change' }
+                // ],
                 content: [
                     { required: true, message: '内容不能为空', trigger: 'blur' }
                 ],
@@ -270,9 +271,9 @@ export default {
             addFormVisible: false,//新增界面是否显示
             addLoading: false,
             addFormRules: {
-                postingType_id: [
-                    { required: true, message: '主题不能为空', trigger: 'change' }
-                ],
+                // postingType_id: [
+                //     { required: true, message: '主题不能为空', trigger: 'change' }
+                // ],
                 content: [
                     { required: true, message: '内容不能为空', trigger: 'blur' }
                 ],
@@ -337,6 +338,13 @@ export default {
 
 
         //是否显示转换
+        formatContent: function (row, column) {
+            if (row.content.length > 20) {
+                return row.content.substring(0, 20) + '......';
+            } else {
+                return row.content;
+            }
+        },
         formatAnonymous: function (row, column) {
             return row.anonymous == 1 ? '是' : row.anonymous == 0 ? '否' : '未知';
         },
@@ -350,7 +358,9 @@ export default {
         //获取帖子列表
         getNewLoves() {
             let para = {
-                type: 'newLoves',
+                // type: 'newLoves',
+                manage_level_id: this.login_user.manage_level_id,
+                manage_college_id: this.login_user.manage_college_id,
                 page: this.page,
                 search: this.filters.search
             };
@@ -359,8 +369,6 @@ export default {
                 console.log('getNewLovesList res', res);
                 this.total = res.data.dataLength;
                 this.loves = res.data.data;
-
-                
 
                 this.listLoading = false;
             });
@@ -392,27 +400,25 @@ export default {
             this.editFormVisible = true;
             this.editForm = Object.assign({}, row);
 
-            let loves = this.loves;
-            for (let love of loves) {
-                if (love.id == row.id) {
-                    let images = love.images_array;
-                    let fileList2 = [];
-                    for (let image of images) {
-                        let fileList = {
-                            url: image
-                        };
-                        fileList2.push(fileList);
-                    }
-                    this.fileList2 = fileList2;
-                }
-            }     
+            console.log('row', row);
+            let images = row.images_array;
+            let fileList2 = [];
+            for (let image of images) {
+                let fileList = {
+                    url: image
+                };
+                fileList2.push(fileList);
+            }
+            this.fileList2 = fileList2;
+
+            console.log('this.fileList2', this.fileList2);
         },
         //显示新增界面
         handleAdd: function () {
             this.addFormVisible = true;
             this.addForm = {
                 user_id: '',
-                postingType_id: '',
+                postingType_id: 1,
                 content: '',
                 images: '',
                 video_url: '',
@@ -498,6 +504,11 @@ export default {
     },
     mounted() {
         this.getNewLoves();
+
+        var login_user = sessionStorage.getItem('user');
+		if (login_user) {
+			this.login_user = JSON.parse(login_user);
+        }
     }
 }
 

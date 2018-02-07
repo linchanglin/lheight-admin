@@ -34,7 +34,7 @@ if (location.href.indexOf("life.collhome.com") > -1) {
 
 
 
-
+//完成
 export const requestLogin = params => { return axios.post(`${base}/admin/login`, params).then(res => res.data); };
 
 export const getUptoken = () => { return axios.get(`${base}/uptoken`); };
@@ -43,12 +43,13 @@ export const addImageToLove = params => { return axios.post(`${base}/addImage/lo
 export const removeImageFromLove = params => { return axios.post(`${base}/removeImage/love`, {params: params}); };
 
 
-export const getNewLovesList = params => { return axios.get(`${base}/loves`, {params: params}); };
-export const addLove = params => { return axios.post(`${base}/loves`, {params: params}); };
-export const editLove = params => { return axios.post(`${base}/loves`, {params: params}); };
+export const getNewLovesList = params => { return axios.get(`${base}/loves_backsystem`, {params: params}); };
+export const addLove = params => { return axios.post(`${base}/loves_backsystem`, {params: params}); };
+export const editLove = params => { return axios.post(`${base}/loves_backsystem`, {params: params}); };
 export const removeLove = params => { return axios.post(`${base}/delete/love`, {params: params}); };
 export const batchRemoveLove = params => { return axios.post(`${base}/delete/loves`, {params: params}); };
 
+//完成
 export const getRadiosList = params => { return axios.get(`${base}/get_radio/list`, {params: params}); };
 export const addRadio = params => { return axios.post(`${base}/radios`, {params: params}); };
 export const editRadio = params => { return axios.post(`${base}/radios`, {params: params}); };
