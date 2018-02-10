@@ -149,11 +149,11 @@ export default {
 			this.sysUserAvatar = user.avatarUrl || '';
 
 			if(user.manage_level_id == 1) {
-				this.sysName = '全国大学' + '(校园生活墙)';
+				this.sysName = '全国大学';
 			} else if (user.manage_level_id == 4) {
-				this.sysName = user.manage_college_name + '(校园生活墙)';
+				this.sysName = user.manage_college_name;
 			} else {
-				this.sysName = 校园生活墙管理系统;
+				this.sysName = 校园生活墙;
 			}
 		}
 
