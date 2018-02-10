@@ -1,7 +1,6 @@
 <template>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-    <h3 class="title" v-if="login_user.manage_level_id == 1">校园生活墙管理系统</h3>
-    <h3 class="title" v-if="login_user.manage_level_id == 4">{{login_user.manage_college_name}}(校园生活墙)</h3>
+    <h3 class="title">校园生活墙管理系统</h3>
     <el-form-item prop="account">
       <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>

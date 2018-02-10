@@ -10,7 +10,8 @@
                     <el-button type="primary" v-on:click="getNewLoves">查询</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="handleAdd">新增</el-button>
+                    <el-button type="primary" @click="handleAdd" v-if="login_user.manage_level_id == 1">新增</el-button>
+                    <el-button type="primary" @click="handleAdd" disabled v-else>新增</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
