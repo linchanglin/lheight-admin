@@ -38,7 +38,7 @@ export default {
           //{ validator: validaePass2 }
         ]
       },
-      checked: true
+      checked: false
     };
   },
   methods: {
