@@ -1,6 +1,7 @@
 <template>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-    <h3 class="title">校园生活墙管理系统</h3>
+    <h3 class="title" v-if="login_user.manage_level_id == 1">校园生活墙管理系统</h3>
+    <h3 class="title" v-if="login_user.manage_level_id == 4">{{login_user.manage_college_name}}(校园生活墙)</h3>
     <el-form-item prop="account">
       <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
@@ -21,6 +22,8 @@ import { requestLogin } from '../api/api';
 export default {
   data() {
     return {
+      login_user: {},
+
       logining: false,
       ruleForm2: {
         account: '',
@@ -43,81 +46,84 @@ export default {
     handleReset2() {
       this.$refs.ruleForm2.resetFields();
     },
-    handleSubmit2(ev) {
-      var _this = this;
-      this.$refs.ruleForm2.validate((valid) => {
-        if (valid) {
-          //_this.$router.replace('/table');
-          // this.logining = true;
-          //NProgress.start();
-          // var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-          // this.logining = false;
-          var user = {
-            id: 1,
-            avatarUrl: 'http://cdn.collhome.com/love.png',
-            realname: '校园生活墙'
-          }
-
-          if (this.ruleForm2.account == 'admin' && this.ruleForm2.checkPass == 'biaobaiqiang') {
-            sessionStorage.setItem('user', JSON.stringify(user));
-            // this.$router.push({ path: '/table' });
-            this.$router.push({ path: '/loves' });
-          } else {
-            this.$message({
-              message: '用户名或密码错误！',
-              type: 'error'
-            });
-          }
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // handleSubmit2(ev) {
     //   var _this = this;
     //   this.$refs.ruleForm2.validate((valid) => {
     //     if (valid) {
     //       //_this.$router.replace('/table');
-    //       this.logining = true;
+    //       // this.logining = true;
     //       //NProgress.start();
-    //       var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-    //       requestLogin(loginParams).then(data => {
-    //         this.logining = false;
-    //         //NProgress.done();
-    //         console.log('requestLogin data', data);
-    //         let { msg, code, user } = data;
-    //         if (code !== 200) {
-    //           this.$message({
-    //             message: msg,
-    //             type: 'error'
-    //           });
-    //         } else {
-    //           sessionStorage.setItem('user', JSON.stringify(user));
-    //           // this.$router.push({ path: '/table' });
-    //           this.$router.push({ path: '/loves' });
-    //         }
-    //       });
+    //       // var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+    //       // this.logining = false;
+    //       var user = {
+    //         id: 1,
+    //         manage_level_id: 4,
+    //         manage_college_id: 1,
+    //         avatarUrl: 'http://cdn.collhome.com/love.png',
+    //         realname: '校园生活墙'
+    //       }
+
+    //       if (this.ruleForm2.account == 'admin' && this.ruleForm2.checkPass == 'biaobaiqiang') {
+    //         sessionStorage.setItem('user', JSON.stringify(user));
+    //         // this.$router.push({ path: '/table' });
+    //         this.$router.push({ path: '/loves' });
+    //       } else {
+    //         this.$message({
+    //           message: '用户名或密码错误！',
+    //           type: 'error'
+    //         });
+    //       }
     //     } else {
     //       console.log('error submit!!');
     //       return false;
     //     }
     //   });
-    // }
+    // },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    handleSubmit2(ev) {
+      var _this = this;
+      this.$refs.ruleForm2.validate((valid) => {
+        if (valid) {
+          //_this.$router.replace('/table');
+          this.logining = true;
+          //NProgress.start();
+          var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+          requestLogin(loginParams).then(data => {
+            this.logining = false;
+            //NProgress.done();
+            console.log('requestLogin data', data);
+            let { msg, code, user } = data;
+            if (code !== 200) {
+              this.$message({
+                message: msg,
+                type: 'error'
+              });
+            } else {
+              sessionStorage.setItem('user', JSON.stringify(user));
+              this.login_user = user;
+              // this.$router.push({ path: '/table' });
+              this.$router.push({ path: '/loves' });
+            }
+          });
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    }
     
 
 

@@ -48,22 +48,23 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-volume-down',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/radios', component: Radios, name: '电台管理' }
-        ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '',
         iconCls: 'fa fa-comment',
         leaf: true,//只有一个节点
         children: [
             { path: '/loves/:id/comments', component: Comments, name: '评论管理' }
         ]
     },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-volume-down',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/radios', component: Radios, name: '电台管理' }
+        ]
+    },
+    
     {
         path: '/',
         component: Home,

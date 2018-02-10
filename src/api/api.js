@@ -46,8 +46,24 @@ export const removeImageFromLove = params => { return axios.post(`${base}/remove
 export const getNewLovesList = params => { return axios.get(`${base}/loves_backsystem`, {params: params}); };
 export const addLove = params => { return axios.post(`${base}/loves_backsystem`, {params: params}); };
 export const editLove = params => { return axios.post(`${base}/loves_backsystem`, {params: params}); };
-export const removeLove = params => { return axios.post(`${base}/delete/love`, {params: params}); };
+export const removeLove = params => { return axios.post(`${base}/delete/love_backsystem`, {params: params}); };
 export const batchRemoveLove = params => { return axios.post(`${base}/delete/loves`, {params: params}); };
+
+export const getLove = params => { return axios.get(`${base}/loves_backsystem/${params.id}`); };
+export const getCommentsList = params => { return axios.get(`${base}/loves/${params.id}/comments_backsystem`); };
+export const addComment = params => { return axios.post(`${base}/comments_backsystem`, {params: params}); };
+export const editComment = params => { return axios.post(`${base}/comments_backsystem`, {params: params}); };
+export const removeComment = params => { return axios.post(`${base}/delete/comment_backsystem`, {params: params}); };
+export const batchRemoveComment = params => { return axios.post(`${base}/delete/comments`, {params: params}); };
+
+export const getComment = params => { return axios.get(`${base}/comments_backsystem/${params.id}`); };
+export const getRepliesList = params => { return axios.get(`${base}/comments/${params.id}/replies_backsystem`); };
+export const addReply = params => { return axios.post(`${base}/replies_backsystem`, {params: params}); };
+export const editReply = params => { return axios.post(`${base}/replies_backsystem`, {params: params}); };
+export const removeReply = params => { return axios.post(`${base}/delete/reply_backsystem`, {params: params}); };
+export const batchRemoveReply = params => { return axios.post(`${base}/delete/replies`, {params: params}); };
+
+
 
 //完成
 export const getRadiosList = params => { return axios.get(`${base}/get_radio/list`, {params: params}); };
@@ -56,20 +72,6 @@ export const editRadio = params => { return axios.post(`${base}/radios`, {params
 export const removeRadio = params => { return axios.post(`${base}/delete/radio`, {params: params}); };
 export const batchRemoveRadio = params => { return axios.post(`${base}/delete/radios`, {params: params}); };
 
-
-export const getLove = params => { return axios.get(`${base}/loves/${params.id}`); };
-export const getCommentsList = params => { return axios.get(`${base}/loves/${params.id}/comments`); };
-export const addComment = params => { return axios.post(`${base}/comments`, {params: params}); };
-export const editComment = params => { return axios.post(`${base}/comments`, {params: params}); };
-export const removeComment = params => { return axios.post(`${base}/delete/comment`, {params: params}); };
-export const batchRemoveComment = params => { return axios.post(`${base}/delete/comments`, {params: params}); };
-
-export const getComment = params => { return axios.get(`${base}/comments/${params.id}`); };
-export const getRepliesList = params => { return axios.get(`${base}/comments/${params.id}/replies`); };
-export const addReply = params => { return axios.post(`${base}/replies`, {params: params}); };
-export const editReply = params => { return axios.post(`${base}/replies`, {params: params}); };
-export const removeReply = params => { return axios.post(`${base}/delete/reply`, {params: params}); };
-export const batchRemoveReply = params => { return axios.post(`${base}/delete/replies`, {params: params}); };
 
 export const getSystemNoticesList = params => { return axios.get(`${base}/systemNotices_backsystem`, {params: params}); };
 export const addSystemNotice = params => { return axios.post(`${base}/systemNotices`, {params: params}); };

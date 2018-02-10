@@ -7,10 +7,12 @@
                     <el-input v-model="filters.search" placeholder="内容"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" v-on:click="getAboutLoveWalls">查询</el-button>
+                    <el-button type="primary" v-on:click="getAboutLoveWalls" v-if="login_user.manage_level_id == 1">查询</el-button>
+                    <el-button type="primary" v-on:click="getAboutLoveWalls" disabled v-else>查询</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="handleAdd">新增</el-button>
+                    <el-button type="primary" @click="handleAdd" v-if="login_user.manage_level_id == 1">新增</el-button>
+                    <el-button type="primary" @click="handleAdd" disabled v-else>新增</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -29,8 +31,10 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
                 <template scope="scope">
-                    <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="handleDel(scope.row)">删除</el-button>
+                    <el-button size="small" @click="handleEdit(scope.row)" v-if="login_user.manage_level_id == 1">编辑</el-button>
+                    <el-button size="small" @click="handleEdit(scope.row)" disabled v-else>编辑</el-button>
+                    <el-button type="danger" size="small" @click="handleDel(scope.row)" v-if="login_user.manage_level_id == 1">删除</el-button>
+                    <el-button type="danger" size="small" @click="handleDel(scope.row)" disabled v-else>删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -90,6 +94,8 @@ import { getAboutLoveWallsList, removeAboutLoveWall, batchRemoveAboutLoveWall, e
 export default {
     data() {
         return {
+            login_user: {},
+            
             filters: {
                 search: ''
             },
@@ -251,6 +257,11 @@ export default {
         }
     },
     mounted() {
+        var login_user = sessionStorage.getItem('user');
+        if (login_user) {
+            this.login_user = JSON.parse(login_user);
+        }
+
         this.getAboutLoveWalls();
     }
 }

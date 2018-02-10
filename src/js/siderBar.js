@@ -21,6 +21,16 @@ let siderBar = [
         path: '/',
         component: Home,
         name: '',
+        iconCls: 'fa fa-user',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/users', component: Loves, name: '用户管理' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
         iconCls: 'fa fa-volume-down',
         leaf: true,//只有一个节点
         children: [
@@ -38,16 +48,7 @@ let siderBar = [
     //         { path: '/badReports', component: Loves, name: '举报处理' }
     //     ]
     // },
-    {
-        path: '/',
-        component: Home,
-        name: '',
-        iconCls: 'fa fa-user',
-        leaf: true,//只有一个节点
-        children: [
-            { path: '/users', component: Loves, name: '用户管理' }
-        ]
-    },
+    
     // {
     //     path: '/',
     //     component: Home,

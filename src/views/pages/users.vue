@@ -145,6 +145,8 @@ import { getUsersList, removeUser, batchRemoveUser, editUser, addUser } from '..
 export default {
     data() {
         return {
+            login_user: {},
+            
             filters: {
                 search: ''
             },
@@ -201,7 +203,9 @@ export default {
         getUsers() {
             let para = {
                 page: this.page,
-                search: this.filters.search
+                search: this.filters.search,
+                manage_level_id: this.login_user.manage_level_id,
+                manage_college_id: this.login_user.manage_college_id,
             };
             this.listLoading = true;
             getUsersList(para).then((res) => {
@@ -322,7 +326,12 @@ export default {
         // }
     },
     mounted() {
-        this.getUsers();
+        var login_user = sessionStorage.getItem('user');
+		if (login_user) {
+			this.login_user = JSON.parse(login_user);
+        }
+
+        this.getUsers();   
     }
 }
 

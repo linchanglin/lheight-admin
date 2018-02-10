@@ -381,7 +381,13 @@ export default {
             }).then(() => {
                 this.listLoading = true;
                 //NProgress.start();
-                let para = { id: row.id };
+                var user = sessionStorage.getItem('user');
+                if (user) {
+                    user = JSON.parse(user);
+                } else {
+                    user = {};
+                }
+                let para = { id: row.id, user_id: user.id };
                 removeLove(para).then((res) => {
                     this.listLoading = false;
                     //NProgress.done();
@@ -503,12 +509,12 @@ export default {
         }
     },
     mounted() {
-        this.getNewLoves();
-
         var login_user = sessionStorage.getItem('user');
 		if (login_user) {
 			this.login_user = JSON.parse(login_user);
         }
+
+        this.getNewLoves();
     }
 }
 
